@@ -14,44 +14,10 @@ const byte NAVE_PIN_R = 7;
 const byte NAVE_PIN_G = 5;
 const byte NAVE_PIN_B = 4;
 
+int last_column_drawn = -1;
 int nave_pos = 360;
-
-class State {
-public:
-    static State* current_state;
-    static void change_state(State* new_state);
-    virtual const char* name() = 0;
-    virtual void setup() = 0;
-    virtual void loop() {}
-};
-
-void State::change_state (State* new_state) {
-#ifdef DEBUG
-    Serial.println(new_state->name());
-#endif
-    State::current_state = new_state;
-    State::current_state->setup();
-}
-
-class GameoverState : public State {
-protected:
-public:
-    const char* name() {
-      return "Game Over";
-    }
-    void apagar_todo();
-    void setup();
-    void loop();
-} gameover_state;
-
-class PlayState : public State {
-public:
-    const char* name() {
-      return "Running Game";
-    }
-    void setup();
-    void loop();
-} play_state;
+int drift_pos = 100;
+int drift_speed = 1;
 
 class Pattern {
 public:
@@ -200,7 +166,7 @@ const long color_table[] = {
 //  0xffff00,
 //  0x0000ff,
 //  0x00ff00,
-  0x00ffff,
+  0xffffff,
 //  0x808000,
 //  0x404000,
 };
@@ -236,11 +202,7 @@ class CircularBuffer {
   byte buffer[NUM_ROWS];
   byte first_row;
 public:
-  CircularBuffer() {
-    reset();
-  }
-  void reset() {
-    first_row = 0;
+  CircularBuffer() : first_row(0) {
     int n;
     for (n=0; n<NUM_ROWS; n++) {
       buffer[n] = 0;
@@ -258,7 +220,7 @@ public:
   }
 };
 
-class Ledbar {
+class Display {
   void setPixelColor(int pixel, long color) {
     byte red = (color >> 16) & 0xff;
     byte green = (color >> 8) & 0xff;
@@ -271,16 +233,13 @@ class Ledbar {
 
 public:
   boolean alt_row;
-  
   void init() {
     Tlc.init();
     clear();
   }
-  
   void clear() {
     Tlc.clear();
   }
-  
   void draw(byte num_row, boolean value) {
     const long BLUE = 0xffff00;
     long color;
@@ -291,11 +250,9 @@ public:
     }
     setPixelColor(num_row, color);
   }
-  
   void update() {
     Tlc.update();
   }
-  
 };
 
 class Board {
@@ -307,14 +264,7 @@ class Board {
   
 public:
 
-  Board(): pat(random_pattern()) {
-    reset();
-  }
-  
-  void reset() {
-    first_row = 0;
-    pat = random_pattern();
-    visible.reset();    
+  Board(): first_row(0), pat(random_pattern()) {
   }
   
   Pattern& random_pattern() {
@@ -364,34 +314,21 @@ public:
     }
   }
   
-  void draw_column(byte column, Ledbar& ledbar) {
+  void draw_column(byte column, Display& display) {
     byte mask = 1 << column;
-    ledbar.clear();
-    ledbar.alt_row = (column % 2);
+    display.clear();
+    display.alt_row = (column % 2);
     for (byte n=0; n<NUM_ROWS; n++) {
       byte row = visible.get_row(n);
       boolean value = row & mask;
-      ledbar.draw(n, value);
+      display.draw(n, value);
     }
   }
   
 };
 
-class Display {
-  int last_column_drawn;
-  int drift_pos;
-  int drift_speed;
-public:
-  Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0) {
-  }
-  void step() {
-      drift_pos = (drift_pos + drift_speed) % SUBDEGREES;
-  }
-};
-
-Ledbar ledbar;
-Board board;
 Display display;
+Board board;
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
@@ -405,10 +342,9 @@ void setup(){
   
   pinMode(HALL_SENSOR, INPUT_PULLUP);
   attachInterrupt(0, handle_interrupt, FALLING);
-  ledbar.init();
+  display.init();
   init_nave();
   board.fill_patterns();
-  State::change_state(&play_state);
 }
 
 volatile unsigned long last_turn = 0;
@@ -471,7 +407,7 @@ void serialEvent() {
   }
 }
 
-void PlayState::loop() {
+void loop() {
   
   if (stringComplete) {
     Serial.print("recibi:");
@@ -486,7 +422,6 @@ void PlayState::loop() {
     stringComplete = false;
   }
 
-/*
   int drift_random = random(0, 6000);
   if (drift_random < 7) {
     drift_speed = drift_random - 3;
@@ -494,7 +429,8 @@ void PlayState::loop() {
       drift_speed = 4;
     }
   }
-*/
+
+  drift_pos = (drift_pos + drift_speed) % SUBDEGREES;
  
   unsigned long loop_start = micros();
   
@@ -540,8 +476,7 @@ void PlayState::loop() {
   }
   
   if (current_column != last_column_drawn) {
-    board.draw_column(current_column, ledbar);
-    ledbar.update();
+    board.draw_column(current_column, display);
   }
   
   /*
@@ -557,22 +492,6 @@ void PlayState::loop() {
   */
   
   //colorizer.step();
+  display.update();
 }
 
-State* State::current_state;
-
-void PlayState::setup() {
-  board.reset();
-}
-
-void GameoverState::setup() {
-  
-}
-
-void GameoverState::loop() {
-  
-}
-
-void loop() {
-    State::current_state->loop();
-}
