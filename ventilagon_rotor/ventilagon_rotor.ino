@@ -16,6 +16,24 @@ const byte NAVE_PIN_B = 4;
 
 int nave_pos = 360;
 
+class Nivel {
+    const int velocidad;
+    const char* cancion;
+    const long color;
+  public:
+    Nivel(int velocidad, char* cancion, long color) : velocidad(velocidad), cancion(cancion), color(color) {
+    }
+};
+
+Nivel niveles[] = {
+  Nivel(1, "A", 0x0000ff),
+  Nivel(2, "B", 0x00ff00),
+  Nivel(3, "C", 0xff0000),
+  Nivel(4, "A", 0x00ffff),
+  Nivel(5, "B", 0xff00ff),
+  Nivel(6, "C", 0xffff00)
+};
+
 class State {
 public:
     static State* current_state;
