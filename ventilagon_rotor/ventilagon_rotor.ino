@@ -35,7 +35,7 @@ Nivel niveles[] = {
 };
 
 class State {
-public:
+  public:
     static State* current_state;
     static void change_state(State* new_state);
     virtual const char* name() = 0;
@@ -45,15 +45,15 @@ public:
 
 void State::change_state (State* new_state) {
 #ifdef DEBUG
-    Serial.println(new_state->name());
+  Serial.println(new_state->name());
 #endif
-    State::current_state = new_state;
-    State::current_state->setup();
+  State::current_state = new_state;
+  State::current_state->setup();
 }
 
 class GameoverState : public State {
-protected:
-public:
+  protected:
+  public:
     const char* name() {
       return "Game Over";
     }
@@ -63,7 +63,7 @@ public:
 } gameover_state;
 
 class PlayState : public State {
-public:
+  public:
     const char* name() {
       return "Running Game";
     }
@@ -72,16 +72,16 @@ public:
 } play_state;
 
 class Pattern {
-public:
-  byte len;
-  const char PROGMEM* rows;
-  
-  Pattern(byte len, const char PROGMEM* rows) : len(len), rows(rows) {
-  }
-  
-  inline byte get_row(byte offset) {
-    return pgm_read_byte(rows + offset);
-  }
+  public:
+    byte len;
+    const char PROGMEM* rows;
+
+    Pattern(byte len, const char PROGMEM* rows) : len(len), rows(rows) {
+    }
+
+    inline byte get_row(byte offset) {
+      return pgm_read_byte(rows + offset);
+    }
 };
 
 
@@ -121,84 +121,84 @@ const char PROGMEM transformations[] = {
 
 // 20 rows
 const char PROGMEM pat0[] = {
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B100111, 0B100111, 0B100111, 0B100111, 
-  0B110011, 0B110011, 0B110011, 0B110011, 
-  0B111001, 0B111001, 0B111001, 0B111001, 
-  0B111100, 0B111100, 0B111100, 0B111100, 
-  0B011110, 0B011110, 0B011110, 0B011110, 
-  0B001111, 0B001111, 0B001111, 0B001111, 
-  0B100111, 0B100111, 0B100111, 0B100111, 
-  0B110011, 0B110011, 0B110011, 0B110011, 
-  0B111001, 0B111001, 0B111001, 0B111001, 
-  0B111100, 0B111100, 0B111100, 0B111100, 
-  0B011110, 0B011110, 0B011110, 0B011110, 
-  0B001111, 0B001111, 0B001111, 0B001111, 
-  0B100111, 0B100111, 0B100111, 0B100111, 
-  0B110011, 0B110011, 0B110011, 0B110011, 
-  0B111001, 0B111001, 0B111001, 0B111001, 
-  0B111100, 0B111100, 0B111100, 0B111100, 
-  0B011110, 0B011110, 0B011110, 0B011110, 
-  0B001111, 0B001111, 0B001111, 0B001111, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B100111, 0B100111, 0B100111, 0B100111,
+  0B110011, 0B110011, 0B110011, 0B110011,
+  0B111001, 0B111001, 0B111001, 0B111001,
+  0B111100, 0B111100, 0B111100, 0B111100,
+  0B011110, 0B011110, 0B011110, 0B011110,
+  0B001111, 0B001111, 0B001111, 0B001111,
+  0B100111, 0B100111, 0B100111, 0B100111,
+  0B110011, 0B110011, 0B110011, 0B110011,
+  0B111001, 0B111001, 0B111001, 0B111001,
+  0B111100, 0B111100, 0B111100, 0B111100,
+  0B011110, 0B011110, 0B011110, 0B011110,
+  0B001111, 0B001111, 0B001111, 0B001111,
+  0B100111, 0B100111, 0B100111, 0B100111,
+  0B110011, 0B110011, 0B110011, 0B110011,
+  0B111001, 0B111001, 0B111001, 0B111001,
+  0B111100, 0B111100, 0B111100, 0B111100,
+  0B011110, 0B011110, 0B011110, 0B011110,
+  0B001111, 0B001111, 0B001111, 0B001111,
+  0B000000, 0B000000, 0B000000, 0B000000,
 };
 
 // 12 rows
 const char PROGMEM pat1[] = {
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B101111, 0B101111, 0B101111, 0B101111, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B111101, 0B111101, 0B111101, 0B111101, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B101111, 0B101111, 0B101111, 0B101111, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B101111, 0B101111, 0B101111, 0B101111,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B111101, 0B111101, 0B111101, 0B111101,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B101111, 0B101111, 0B101111, 0B101111,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000000, 0B000000, 0B000000, 0B000000,
 };
 
 // 11 rows
 const char PROGMEM pat2[] = {
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B110110, 0B110110, 0B110110, 0B110110, 
-  0B010010, 0B010010, 0B010010, 0B010010, 
-  0B011011, 0B011011, 0B011011, 0B011011, 
-  0B010010, 0B010010, 0B010010, 0B010010, 
-  0B110110, 0B110110, 0B110110, 0B110110, 
-  0B010010, 0B010010, 0B010010, 0B010010, 
-  0B011011, 0B011011, 0B011011, 0B011011, 
-  0B010010, 0B010010, 0B010010, 0B010010, 
-  0B110110, 0B110110, 0B110110, 0B110110, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B110110, 0B110110, 0B110110, 0B110110,
+  0B010010, 0B010010, 0B010010, 0B010010,
+  0B011011, 0B011011, 0B011011, 0B011011,
+  0B010010, 0B010010, 0B010010, 0B010010,
+  0B110110, 0B110110, 0B110110, 0B110110,
+  0B010010, 0B010010, 0B010010, 0B010010,
+  0B011011, 0B011011, 0B011011, 0B011011,
+  0B010010, 0B010010, 0B010010, 0B010010,
+  0B110110, 0B110110, 0B110110, 0B110110,
+  0B000000, 0B000000, 0B000000, 0B000000,
 };
 
 // 10 rows
 const char PROGMEM pat3[] = {
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B010010, 0B010010, 0B010010, 0B010010, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B101010, 0B101010, 0B101010, 0B101010, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B010101, 0B010101, 0B010101, 0B010101, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B101110, 0B101110, 0B101110, 0B101110, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B010010, 0B010010, 0B010010, 0B010010,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B101010, 0B101010, 0B101010, 0B101010,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B010101, 0B010101, 0B010101, 0B010101,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B101110, 0B101110, 0B101110, 0B101110,
+  0B000000, 0B000000, 0B000000, 0B000000,
 };
 
 // 9 rows
 const char PROGMEM pat4[] = {
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000001, 0B000001, 0B000001, 0B000001, 
-  0B000010, 0B000010, 0B000010, 0B000010, 
-  0B000100, 0B000100, 0B000100, 0B000100, 
-  0B001000, 0B001000, 0B001000, 0B001000, 
-  0B010000, 0B010000, 0B010000, 0B010000, 
-  0B100000, 0B100000, 0B100000, 0B100000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
-  0B000000, 0B000000, 0B000000, 0B000000, 
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000001, 0B000001, 0B000001, 0B000001,
+  0B000010, 0B000010, 0B000010, 0B000010,
+  0B000100, 0B000100, 0B000100, 0B000100,
+  0B001000, 0B001000, 0B001000, 0B001000,
+  0B010000, 0B010000, 0B010000, 0B010000,
+  0B100000, 0B100000, 0B100000, 0B100000,
+  0B000000, 0B000000, 0B000000, 0B000000,
+  0B000000, 0B000000, 0B000000, 0B000000,
 };
 
 Pattern all_patterns[] = {
@@ -212,187 +212,187 @@ Pattern all_patterns[] = {
 #define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)
 
 const long color_table[] = {
-//  0xff0000,
-//  0xffff00,
-//  0x00ff00,
-//  0xffff00,
-//  0x0000ff,
-//  0x00ff00,
+  //  0xff0000,
+  //  0xffff00,
+  //  0x00ff00,
+  //  0xffff00,
+  //  0x0000ff,
+  //  0x00ff00,
   0x00ffff,
-//  0x808000,
-//  0x404000,
+  //  0x808000,
+  //  0x404000,
 };
 
 class Colorizer {
-  volatile byte pos;
-  byte plof;
-public:
-  long color1;
-  long color2;
-  Colorizer() {
-    plof = 0;
-    color1 = color_table[0];
-    color2 = 0x000000;
-  }
-  void step() {
-    pos++;
-    color1 = color_table[(pos>>4)%elements_in(color_table)];
-
-    /*
-    if ((plof++)==7) {
+    volatile byte pos;
+    byte plof;
+  public:
+    long color1;
+    long color2;
+    Colorizer() {
       plof = 0;
-      pos++;
-      color1 = color_table[pos%elements_in(color_table)];
+      color1 = color_table[0];
+      color2 = 0x000000;
     }
-    */
-  } 
+    void step() {
+      pos++;
+      color1 = color_table[(pos >> 4) % elements_in(color_table)];
+
+      /*
+      if ((plof++)==7) {
+        plof = 0;
+        pos++;
+        color1 = color_table[pos%elements_in(color_table)];
+      }
+      */
+    }
 };
 
 Colorizer colorizer;
 
 class CircularBuffer {
-  byte buffer[NUM_ROWS];
-  byte first_row;
-public:
-  CircularBuffer() {
-    reset();
-  }
-  void reset() {
-    first_row = 0;
-    int n;
-    for (n=0; n<NUM_ROWS; n++) {
-      buffer[n] = 0;
-    }  
-  }
-  void push(byte row) {
-    cli();
-    buffer[first_row] = row;
-    first_row = (first_row + 1) % NUM_ROWS;
-    sei();
-  }
-  byte get_row(byte row_num) {
-    byte pos = (row_num + first_row) % NUM_ROWS;
-    return buffer[pos];
-  }
+    byte buffer[NUM_ROWS];
+    byte first_row;
+  public:
+    CircularBuffer() {
+      reset();
+    }
+    void reset() {
+      first_row = 0;
+      int n;
+      for (n = 0; n < NUM_ROWS; n++) {
+        buffer[n] = 0;
+      }
+    }
+    void push(byte row) {
+      cli();
+      buffer[first_row] = row;
+      first_row = (first_row + 1) % NUM_ROWS;
+      sei();
+    }
+    byte get_row(byte row_num) {
+      byte pos = (row_num + first_row) % NUM_ROWS;
+      return buffer[pos];
+    }
 };
 
 class Ledbar {
-  void setPixelColor(int pixel, long color) {
-    byte red = (color >> 16) & 0xff;
-    byte green = (color >> 8) & 0xff;
-    byte blue = (color >> 0) & 0xff;
-    byte base = pixel * 3;
-    Tlc.set(base + 0, blue<<4 + 0xf);
-    Tlc.set(base + 1, green<<4 + 0xf);
-    Tlc.set(base + 2, red<<4 + 0xf);
-  }
-
-public:
-  boolean alt_row;
-  
-  void init() {
-    Tlc.init();
-    clear();
-  }
-  
-  void clear() {
-    Tlc.clear();
-  }
-  
-  void draw(byte num_row, boolean value) {
-    const long BLUE = 0xffff00;
-    long color;
-    if (num_row == ROW_NAVE) {
-      color = value ? BLUE : colorizer.color2;
-    } else {
-      color = value ? colorizer.color1 : colorizer.color2;
+    void setPixelColor(int pixel, long color) {
+      byte red = (color >> 16) & 0xff;
+      byte green = (color >> 8) & 0xff;
+      byte blue = (color >> 0) & 0xff;
+      byte base = pixel * 3;
+      Tlc.set(base + 0, blue << 4 + 0xf);
+      Tlc.set(base + 1, green << 4 + 0xf);
+      Tlc.set(base + 2, red << 4 + 0xf);
     }
-    setPixelColor(num_row, color);
-  }
-  
-  void update() {
-    Tlc.update();
-  }
-  
+
+  public:
+    boolean alt_row;
+
+    void init() {
+      Tlc.init();
+      clear();
+    }
+
+    void clear() {
+      Tlc.clear();
+    }
+
+    void draw(byte num_row, boolean value) {
+      const long BLUE = 0xffff00;
+      long color;
+      if (num_row == ROW_NAVE) {
+        color = value ? BLUE : colorizer.color2;
+      } else {
+        color = value ? colorizer.color1 : colorizer.color2;
+      }
+      setPixelColor(num_row, color);
+    }
+
+    void update() {
+      Tlc.update();
+    }
+
 } ledbar;
 
 class Board {
-  CircularBuffer visible;
-  byte first_row;
-  Pattern& pat;
-  byte pat_offset;
-  int transformation_base;
-  
-public:
+    CircularBuffer visible;
+    byte first_row;
+    Pattern& pat;
+    byte pat_offset;
+    int transformation_base;
 
-  Board(): pat(random_pattern()) {
-    reset();
-  }
-  
-  void reset() {
-    first_row = 0;
-    pat = random_pattern();
-    visible.reset();    
-  }
-  
-  Pattern& random_pattern() {
-    visible.push(0);
-    visible.push(0);
-    visible.push(0);
-    visible.push(0);
-    transformation_base = random(0, 12) << 6;
-    return all_patterns[random(0, elements_in(all_patterns))];
-  }
-  
-  byte transform(byte b) {
-    return pgm_read_byte(transformations + transformation_base + b);
-  }
+  public:
 
-  void fill_patterns() {
-    byte row_num = 20;
-    while (row_num != NUM_ROWS) {
+    Board(): pat(random_pattern()) {
+      reset();
+    }
+
+    void reset() {
+      first_row = 0;
       pat = random_pattern();
-      for (pat_offset = 0; pat_offset < pat.len; pat_offset++) {
-        byte row = pat.get_row(pat_offset);
-        visible.push(transform(row));
-        row_num++;
-        if(row_num == NUM_ROWS) {
-          break;
+      visible.reset();
+    }
+
+    Pattern& random_pattern() {
+      visible.push(0);
+      visible.push(0);
+      visible.push(0);
+      visible.push(0);
+      transformation_base = random(0, 12) << 6;
+      return all_patterns[random(0, elements_in(all_patterns))];
+    }
+
+    byte transform(byte b) {
+      return pgm_read_byte(transformations + transformation_base + b);
+    }
+
+    void fill_patterns() {
+      byte row_num = 20;
+      while (row_num != NUM_ROWS) {
+        pat = random_pattern();
+        for (pat_offset = 0; pat_offset < pat.len; pat_offset++) {
+          byte row = pat.get_row(pat_offset);
+          visible.push(transform(row));
+          row_num++;
+          if (row_num == NUM_ROWS) {
+            break;
+          }
         }
       }
     }
-  }
-  
-  boolean colision(int pos, byte num_row) {
-    return 0;
-    // la nave esta enfrente
-    int real_pos = (pos + SUBDEGREES/2)%SUBDEGREES;
-    byte nave_column = (real_pos * NUM_COLUMNS) / SUBDEGREES;
-    byte row_nave = visible.get_row(num_row);
-    byte mask = 1 << nave_column;
-    return row_nave & mask;
-  }
 
-  void step() {
-    visible.push(transform(pat.get_row(pat_offset)));
-    pat_offset++;
-    if (pat_offset > pat.len) {
-      pat = random_pattern();
-      pat_offset = 0;
+    boolean colision(int pos, byte num_row) {
+      return 0;
+      // la nave esta enfrente
+      int real_pos = (pos + SUBDEGREES / 2) % SUBDEGREES;
+      byte nave_column = (real_pos * NUM_COLUMNS) / SUBDEGREES;
+      byte row_nave = visible.get_row(num_row);
+      byte mask = 1 << nave_column;
+      return row_nave & mask;
     }
-  }
-  
-  void draw_column(byte column, Ledbar& ledbar) {
-    byte mask = 1 << column;
-    ledbar.clear();
-    ledbar.alt_row = (column % 2);
-    for (byte n=0; n<NUM_ROWS; n++) {
-      byte row = visible.get_row(n);
-      boolean value = row & mask;
-      ledbar.draw(n, value);
+
+    void step() {
+      visible.push(transform(pat.get_row(pat_offset)));
+      pat_offset++;
+      if (pat_offset > pat.len) {
+        pat = random_pattern();
+        pat_offset = 0;
+      }
     }
-  }
-  
+
+    void draw_column(byte column, Ledbar& ledbar) {
+      byte mask = 1 << column;
+      ledbar.clear();
+      ledbar.alt_row = (column % 2);
+      for (byte n = 0; n < NUM_ROWS; n++) {
+        byte row = visible.get_row(n);
+        boolean value = row & mask;
+        ledbar.draw(n, value);
+      }
+    }
+
 } board;
 
 volatile unsigned long last_turn = 0;
@@ -409,26 +409,26 @@ unsigned long last_step = 0;
 const unsigned long step_delay = 100000L;
 
 class Display {
-  int last_column_drawn;
-  int drift_pos;
-  int drift_speed;
-public:
-  Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0) {
-  }
-  
-  void adjust_drift() {
-    int drift_random = random(0, 6000);
-    if (drift_random < 7) {
-      drift_speed = drift_random - 3;
-      if (drift_speed == 0) {
-        drift_speed = 4;
+    int last_column_drawn;
+    int drift_pos;
+    int drift_speed;
+  public:
+    Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0) {
+    }
+
+    void adjust_drift() {
+      int drift_random = random(0, 6000);
+      if (drift_random < 7) {
+        drift_speed = drift_random - 3;
+        if (drift_speed == 0) {
+          drift_speed = 4;
+        }
       }
     }
-  }
-  
-  void step(unsigned long now) {
+
+    void step(unsigned long now) {
       drift_pos = (drift_pos + drift_speed) % SUBDEGREES;
-  
+
       unsigned long pos_width = min(last_turn_duration / SUBDEGREES, 100000L);
       unsigned long column_width = min(last_turn_duration / NUM_COLUMNS, 100000L);
 
@@ -438,25 +438,25 @@ public:
 
       // FIXME: arreglar cuando la nave cruza la zona oscura,
       //        que se va a ver finito
-      if (abs(nave_pos-current_pos) < NAVE_WIDTH/2) {
+      if (abs(nave_pos - current_pos) < NAVE_WIDTH / 2) {
         prender_nave();
       } else {
         apagar_nave();
       }
-      
+
       if (current_column != last_column_drawn) {
         board.draw_column(current_column, ledbar);
         ledbar.update();
       }
-  }
+    }
 } display;
 
-void setup(){
+void setup() {
   Serial.begin(57600);
 
   randomSeed(analogRead(0));
   //randomSeed(83);
-  
+
   pinMode(HALL_SENSOR, INPUT_PULLUP);
   attachInterrupt(0, handle_interrupt, FALLING);
   ledbar.init();
@@ -491,7 +491,7 @@ char inChar = 0;
 void serialEvent() {
   while (Serial.available()) {
     inChar = (char)Serial.read();
-    
+
     switch (inChar) {
       case 'L':
         boton_ccw = true;
@@ -525,39 +525,39 @@ void PlayState::loop() {
       Serial.println(last_turn_duration);
     }
     if (inChar == 'n') {
-        board.fill_patterns();
+      board.fill_patterns();
     }
     inChar = 0;
   }
 
   if (boton_cw || boton_ccw) {
     int new_pos;
-  
+
     if (boton_cw) {
       new_pos = nave_pos + 5;
     }
     if (boton_ccw) {
       new_pos = nave_pos - 5;
-    } 
-    
+    }
+
     boolean colision_futura = board.colision(new_pos, ROW_COLISION);
     boolean colision_actual = board.colision(nave_pos, ROW_NAVE);
-    
+
     if (!colision_futura || colision_actual) {
-      nave_pos = (new_pos+SUBDEGREES) % SUBDEGREES;
+      nave_pos = (new_pos + SUBDEGREES) % SUBDEGREES;
     }
   }
-  
-  
+
+
   if (now > (last_step + step_delay)) {
-    if (!board.colision(nave_pos, ROW_NAVE)) {    
+    if (!board.colision(nave_pos, ROW_NAVE)) {
       board.step();
     }
     last_step = now;
   }
-  
+
   display.step(now);
-  
+
   /*
   while (1) {
     int wait = micros()-(loop_start+slice);
@@ -569,7 +569,7 @@ void PlayState::loop() {
     }
   }
   */
-  
+
   //colorizer.step();
 }
 
@@ -580,14 +580,14 @@ void PlayState::setup() {
 }
 
 void GameoverState::setup() {
-  
+
 }
 
 void GameoverState::loop() {
-    unsigned long now = micros();
-    display.step(now);
+  unsigned long now = micros();
+  display.step(now);
 }
 
 void loop() {
-    State::current_state->loop();
+  State::current_state->loop();
 }
