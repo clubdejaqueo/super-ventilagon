@@ -397,6 +397,17 @@ class Display {
 public:
   Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0) {
   }
+  
+  void adjust_drift() {
+    int drift_random = random(0, 6000);
+    if (drift_random < 7) {
+      drift_speed = drift_random - 3;
+      if (drift_speed == 0) {
+        drift_speed = 4;
+      }
+    }
+  }
+  
   void step(unsigned long now) {
       drift_pos = (drift_pos + drift_speed) % SUBDEGREES;
   
@@ -414,6 +425,7 @@ public:
       } else {
         apagar_nave();
       }
+      
       if (current_column != last_column_drawn) {
         board.draw_column(current_column, ledbar);
         ledbar.update();
@@ -421,12 +433,8 @@ public:
   }
 } display;
 
-String inputString = "";         // a string to hold incoming data
-boolean stringComplete = false;  // whether the string is complete
-
 void setup(){
   Serial.begin(57600);
-  inputString.reserve(200);
 
   randomSeed(analogRead(0));
   //randomSeed(83);
@@ -460,9 +468,11 @@ void apagar_nave() {
 bool boton_cw = false;
 bool boton_ccw = false;
 
+char inChar = 0;
+
 void serialEvent() {
   while (Serial.available()) {
-    char inChar = (char)Serial.read();
+    inChar = (char)Serial.read();
     
     switch (inChar) {
       case 'L':
@@ -477,43 +487,31 @@ void serialEvent() {
       case 'r':
         boton_cw = false;
         break;
-      default:
-        inputString += inChar;
-        if (inChar == ' ') {
-          stringComplete = true;
-        } 
     }
   }
+}
+
+void selectLevel(int level) {
+  // TODO
 }
 
 void PlayState::loop() {
   unsigned long now = micros();
 
-  if (stringComplete) {
-    Serial.print("recibi:");
-    Serial.println(inputString);
-    Serial.print("velocidad:");
-    Serial.println(last_turn_duration);
-    char c = inputString.charAt(0);
-    if (c == 'n') {
+  if (inChar != 0) {
+    if (inChar >= '1' && inChar <= '6') {
+      selectLevel(inChar - '1');
+    }
+    if (inChar == ' ') {
+      Serial.print("velocidad:");
+      Serial.println(last_turn_duration);
+    }
+    if (inChar == 'n') {
         board.fill_patterns();
     }
-    inputString = "";
-    stringComplete = false;
+    inChar = 0;
   }
 
-/*
-  int drift_random = random(0, 6000);
-  if (drift_random < 7) {
-    drift_speed = drift_random - 3;
-    if (drift_speed == 0) {
-      drift_speed = 4;
-    }
-  }
-*/
- 
-  
-  
   if (boton_cw || boton_ccw) {
     int new_pos;
   
@@ -568,7 +566,8 @@ void GameoverState::setup() {
 }
 
 void GameoverState::loop() {
-  
+    unsigned long now = micros();
+    display.step(now);
 }
 
 void loop() {
