@@ -21,7 +21,6 @@ Nivel niveles[] = {
   Nivel(6, "C", 0xffff00)
 };
 
-#define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)
 
 const long color_table[] = {
   //  0xff0000,

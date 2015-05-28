@@ -1,3 +1,7 @@
+const byte NAVE_PIN_R = 7;
+const byte NAVE_PIN_G = 5;
+const byte NAVE_PIN_B = 4;
+
 Nave nave;
 
 void Nave::init() {
