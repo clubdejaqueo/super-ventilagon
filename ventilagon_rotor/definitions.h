@@ -116,5 +116,6 @@ extern Display display;
 extern Nave nave;
 extern GameoverState gameover_state;
 extern PlayState play_state;
+extern const unsigned char PROGMEM transformations[];
 
 #define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)
