@@ -29,7 +29,6 @@ Board::Board() {
 }
 
 void Board::reset() {
-  first_row = 0;
   pat.randomize(0);
   visible.reset();
 }
@@ -38,13 +37,9 @@ void Board::fill_patterns() {
   byte row_num = 20;
   while (row_num != NUM_ROWS) {
     pat.randomize(0);
-    visible.push(0);
-    visible.push(0);
-    visible.push(0);
-    visible.push(0);
 
-    for (pat_offset = 0; pat_offset < pat.len(); pat_offset++) {
-      visible.push(pat.get_row(pat_offset));
+    while (!pat.finished()) {
+      visible.push(pat.next_row());
       row_num++;
       if (row_num == NUM_ROWS) {
         break;
@@ -64,17 +59,10 @@ boolean Board::colision(int pos, byte num_row) {
 }
 
 void Board::step() {
-  visible.push(pat.get_row(pat_offset));
-  //      visible.push();
-  pat_offset++;
-  if (pat_offset > pat.len()) {
-    pat.randomize(99);
-    visible.push(0);
-    visible.push(0);
-    visible.push(0);
-    visible.push(0);
+  visible.push(pat.next_row());
 
-    pat_offset = 0;
+  if (pat.finished()) {
+    pat.randomize(99);
   }
 }
 

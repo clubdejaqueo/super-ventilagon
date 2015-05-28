@@ -9,10 +9,7 @@ const byte ROW_COLISION = 7;
 
 const int SUBDEGREES = 360 * 16;
 const int NAVE_WIDTH = SUBDEGREES / 30;
-
-const byte NAVE_PIN_R = 7;
-const byte NAVE_PIN_G = 5;
-const byte NAVE_PIN_B = 4;
+const byte DEFAULT_BLOCK_HEIGHT = 4;
 
 class BasePattern;
 
@@ -20,12 +17,16 @@ class Pattern {
     BasePattern& base;
     const unsigned char PROGMEM* transformation_base;
     inline unsigned char transform(unsigned char b);
-
+    int current_height;
+    int block_height;
+    int row;
+    int base_len;
+    BasePattern& choose_random();
   public:
     Pattern();
     void randomize(int level);
-    int len();
-    inline unsigned char get_row(int row);
+    inline unsigned char next_row();
+    inline bool finished();
 };
 
 class CircularBuffer {
@@ -51,9 +52,7 @@ class Ledbar {
 
 class Board {
     CircularBuffer visible;
-    byte first_row;
     Pattern pat;
-    byte pat_offset;
 
   public:
     Board();
@@ -118,3 +117,4 @@ extern Nave nave;
 extern GameoverState gameover_state;
 extern PlayState play_state;
 
+#define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)
