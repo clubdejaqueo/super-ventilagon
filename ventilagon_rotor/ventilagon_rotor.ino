@@ -44,7 +44,7 @@ void setup() {
   pinMode(HALL_SENSOR, INPUT_PULLUP);
   attachInterrupt(0, handle_interrupt, FALLING);
   ledbar.init();
-  nave.init();
+  ship.init();
   board.fill_patterns();
   State::change_state(&play_state);
 }
