@@ -110,6 +110,15 @@ class Ship {
     void apagar();
 };
 
+class Level {
+    const int speed;
+    const char* song;
+    const long color;
+  public:
+    Level(int speed, char* song, long color) : speed(speed), song(song), color(color) {
+    }
+};
+
 extern Ledbar ledbar;
 extern Board board;
 extern Display display;
@@ -117,5 +126,6 @@ extern Ship ship;
 extern GameoverState gameover_state;
 extern PlayState play_state;
 extern const unsigned char PROGMEM transformations[];
+extern Level levels[];
 
 #define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)
