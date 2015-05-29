@@ -23,9 +23,9 @@ void Display::step(unsigned long now) {
   // FIXME: arreglar cuando la nave cruza la zona oscura,
   //        que se va a ver finito
   if (abs(nave_pos - current_pos) < NAVE_WIDTH / 2) {
-    nave.prender();
+    ship.prender();
   } else {
-    nave.apagar();
+    ship.apagar();
   }
 
   if (current_column != last_column_drawn) {

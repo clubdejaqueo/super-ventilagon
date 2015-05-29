@@ -27,7 +27,7 @@ const long CALIBRATE_COLOR = 0xff0000;
 
 void Ledbar::draw(byte num_row, boolean value) {
   long color;
-  if (num_row == ROW_NAVE) {
+  if (num_row == ROW_SHIP) {
     color = value ? CALIBRATE_COLOR : BLACK;
   } else {
     color = value ? WALL_COLOR : BLACK;

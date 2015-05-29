@@ -32,7 +32,7 @@ void PlayState::loop() {
     }
 
     boolean colision_futura = board.colision(new_pos, ROW_COLISION);
-    boolean colision_actual = board.colision(nave_pos, ROW_NAVE);
+    boolean colision_actual = board.colision(nave_pos, ROW_SHIP);
 
     if (!colision_futura || colision_actual) {
       nave_pos = (new_pos + SUBDEGREES) % SUBDEGREES;
@@ -41,7 +41,7 @@ void PlayState::loop() {
 
 
   if (now > (last_step + step_delay)) {
-    if (!board.colision(nave_pos, ROW_NAVE)) {
+    if (!board.colision(nave_pos, ROW_SHIP)) {
       board.step();
     }
     last_step = now;

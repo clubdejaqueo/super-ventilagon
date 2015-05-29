@@ -4,7 +4,7 @@ const byte NUM_COLUMNS = 6;
 const byte NUM_ROWS = 32;
 const byte HALL_SENSOR = 2;
 
-const byte ROW_NAVE = 3;
+const byte ROW_SHIP = 3;
 const byte ROW_COLISION = 7;
 
 const int SUBDEGREES = 360 * 16;
@@ -103,7 +103,7 @@ class PlayState : public State {
     void loop();
 };
 
-class Nave {
+class Ship {
   public:
     void init();
     void prender();
@@ -113,7 +113,7 @@ class Nave {
 extern Ledbar ledbar;
 extern Board board;
 extern Display display;
-extern Nave nave;
+extern Ship ship;
 extern GameoverState gameover_state;
 extern PlayState play_state;
 extern const unsigned char PROGMEM transformations[];
