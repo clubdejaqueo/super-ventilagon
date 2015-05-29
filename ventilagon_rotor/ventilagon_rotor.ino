@@ -22,45 +22,6 @@ Nivel niveles[] = {
 };
 
 
-const long color_table[] = {
-  //  0xff0000,
-  //  0xffff00,
-  //  0x00ff00,
-  //  0xffff00,
-  //  0x0000ff,
-  //  0x00ff00,
-  0x00ffff,
-  //  0x808000,
-  //  0x404000,
-};
-
-class Colorizer {
-    volatile byte pos;
-    byte plof;
-  public:
-    long color1;
-    long color2;
-    Colorizer() {
-      plof = 0;
-      color1 = color_table[0];
-      color2 = 0x000000;
-    }
-    void step() {
-      pos++;
-      color1 = color_table[(pos >> 4) % elements_in(color_table)];
-
-      /*
-      if ((plof++)==7) {
-        plof = 0;
-        pos++;
-        color1 = color_table[pos%elements_in(color_table)];
-      }
-      */
-    }
-};
-
-Colorizer colorizer;
-
 volatile unsigned long last_turn = 0;
 volatile unsigned long last_turn_duration = 100000L;
 
@@ -68,7 +29,6 @@ void handle_interrupt() {
   unsigned long this_turn = micros();
   last_turn_duration = this_turn - last_turn;
   last_turn = this_turn;
-  colorizer.step();
 }
 
 unsigned long last_step = 0;

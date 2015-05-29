@@ -21,13 +21,16 @@ void Ledbar::clear() {
   Tlc.clear();
 }
 
+const long BLACK = 0x000000;
+const long WALL_COLOR = 0x00ffff;
+const long CALIBRATE_COLOR = 0xff0000;
+
 void Ledbar::draw(byte num_row, boolean value) {
-  const long BLUE = 0xffff00;
   long color;
   if (num_row == ROW_NAVE) {
-    color = value ? BLUE : colorizer.color2;
+    color = value ? CALIBRATE_COLOR : BLACK;
   } else {
-    color = value ? colorizer.color1 : colorizer.color2;
+    color = value ? WALL_COLOR : BLACK;
   }
   setPixelColor(num_row, color);
 }
