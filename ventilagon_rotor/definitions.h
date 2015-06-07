@@ -7,8 +7,9 @@ const byte HALL_SENSOR = 2;
 const byte ROW_SHIP = 3;
 const byte ROW_COLISION = 7;
 
-const int SUBDEGREES = 360 * 16;
-const int NAVE_WIDTH = SUBDEGREES / 30;
+const int SUBDEGREES = 8192;
+const int SUBDEGREES_MASK = 8191;
+const int SHIP_WIDTH = 272;
 const byte DEFAULT_BLOCK_HEIGHT = 4;
 
 class BasePattern;
@@ -71,7 +72,8 @@ class Display {
     Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0) {
     }
     void adjust_drift();
-    void step(unsigned long now);
+    void tick(unsigned long now);
+    bool ship_on(int current_pos);
 };
 
 class State {
@@ -127,5 +129,6 @@ extern GameoverState gameover_state;
 extern PlayState play_state;
 extern const unsigned char PROGMEM transformations[];
 extern Level levels[];
+extern Level& current_level;
 
 #define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)

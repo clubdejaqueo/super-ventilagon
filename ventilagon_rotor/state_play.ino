@@ -35,7 +35,7 @@ void PlayState::loop() {
     boolean colision_actual = board.colision(nave_pos, ROW_SHIP);
 
     if (!colision_futura || colision_actual) {
-      nave_pos = (new_pos + SUBDEGREES) % SUBDEGREES;
+      nave_pos = (new_pos + SUBDEGREES) & SUBDEGREES_MASK;
     }
   }
 
@@ -47,7 +47,7 @@ void PlayState::loop() {
     last_step = now;
   }
 
-  display.step(now);
+  display.tick(now);
 
   /*
   while (1) {

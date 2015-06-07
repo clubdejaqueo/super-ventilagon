@@ -6,7 +6,7 @@ void GameoverState::setup() {
 
 void GameoverState::loop() {
   unsigned long now = micros();
-  display.step(now);
+  display.tick(now);
 }
 
 
