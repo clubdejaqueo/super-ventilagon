@@ -14,7 +14,9 @@ bool Display::ship_on(int current_pos) {
   if (abs(nave_pos - current_pos) < (SHIP_WIDTH / 2)) {
     return true;
   }
-  if (abs(((nave_pos+SUBDEGREES/2)&SUBDEGREES_MASK) - ((current_pos+SUBDEGREES/2)&SUBDEGREES_MASK)) < (SHIP_WIDTH /2)) {
+  if (abs( ((nave_pos + SUBDEGREES / 2) & SUBDEGREES_MASK) - 
+           ((current_pos + SUBDEGREES / 2) & SUBDEGREES_MASK))
+         < (SHIP_WIDTH / 2)) {
     return true;
   }
   return false;
