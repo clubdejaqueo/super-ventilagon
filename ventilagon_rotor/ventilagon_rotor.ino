@@ -11,6 +11,7 @@ void handle_interrupt() {
   unsigned long this_turn = micros();
   last_turn_duration = this_turn - last_turn;
   last_turn = this_turn;
+  debugln("int");
 }
 
 unsigned long last_step = 0;
@@ -24,17 +25,18 @@ void setup() {
   //randomSeed(83);
 
   pinMode(HALL_SENSOR, INPUT_PULLUP);
-  attachInterrupt(0, handle_interrupt, FALLING);
   ledbar.init();
   ship.init();
   board.fill_patterns();
   State::change_state(&play_state);
+  attachInterrupt(0, handle_interrupt, FALLING);
 }
 
 bool boton_cw = false;
 bool boton_ccw = false;
 
 char inChar = 0;
+
 
 void serialEvent() {
   while (Serial.available()) {
@@ -54,6 +56,22 @@ void serialEvent() {
         boton_cw = false;
         break;
     }
+
+    if (inChar != 0) {
+      if (inChar >= '1' && inChar <= '6') {
+        selectLevel(inChar - '1');
+      }
+      if (inChar == ' ') {
+        Serial.print("velocidad:");
+        Serial.println(last_turn_duration);
+      }
+      if (inChar == 'n') {
+        board.fill_patterns();
+      }
+      inChar = 0;
+    }
+
+    
   }
 }
 

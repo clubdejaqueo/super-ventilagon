@@ -1,5 +1,14 @@
 #include <Arduino.h>
 
+#define DEBUG
+#ifdef DEBUG
+#define debug Serial.print
+#define debugln Serial.println
+#else
+#define debug
+#define debugln
+#endif
+
 const byte NUM_COLUMNS = 6;
 const byte NUM_ROWS = 32;
 const byte HALL_SENSOR = 2;

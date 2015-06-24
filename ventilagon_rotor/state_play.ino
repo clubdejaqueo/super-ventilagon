@@ -7,19 +7,6 @@ void PlayState::setup() {
 void PlayState::loop() {
   unsigned long now = micros();
 
-  if (inChar != 0) {
-    if (inChar >= '1' && inChar <= '6') {
-      selectLevel(inChar - '1');
-    }
-    if (inChar == ' ') {
-      Serial.print("velocidad:");
-      Serial.println(last_turn_duration);
-    }
-    if (inChar == 'n') {
-      board.fill_patterns();
-    }
-    inChar = 0;
-  }
 
   if (boton_cw || boton_ccw) {
     int new_pos;

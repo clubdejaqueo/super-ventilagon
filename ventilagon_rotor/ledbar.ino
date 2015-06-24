@@ -13,6 +13,7 @@ void Ledbar::setPixelColor(int pixel, long color) {
 }
 
 void Ledbar::init() {
+  debugln("Init ledbar");
   Tlc.init();
   clear();
 }
@@ -33,8 +34,13 @@ void Ledbar::draw(byte num_row, boolean value) {
     color = value ? WALL_COLOR : BLACK;
   }
   setPixelColor(num_row, color);
+//  debug("row: ");
+//  debug(num_row);
+//  debug(" color: ");
+//  debugln(color, HEX);
 }
 
 void Ledbar::update() {
+//  debugln("updating tlc");
   Tlc.update();
 }
