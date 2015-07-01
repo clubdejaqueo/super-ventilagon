@@ -7,9 +7,9 @@ void Ledbar::setPixelColor(int pixel, long color) {
   byte green = (color >> 8) & 0xff;
   byte blue = (color >> 0) & 0xff;
   byte base = pixel * 3;
-  Tlc.set(base + 0, blue << 4 + 0xf);
-  Tlc.set(base + 1, green << 4 + 0xf);
-  Tlc.set(base + 2, red << 4 + 0xf);
+  Tlc.set(base + 0, (blue << 4));
+  Tlc.set(base + 1, (green << 4));
+  Tlc.set(base + 2, (red << 4));
 }
 
 void Ledbar::init() {
