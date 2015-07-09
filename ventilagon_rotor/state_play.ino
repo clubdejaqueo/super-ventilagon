@@ -2,6 +2,7 @@ PlayState play_state;
 
 void PlayState::setup() {
   board.reset();
+  audio.play_song(current_level.song);
 }
 
 void PlayState::loop() {
@@ -17,11 +18,11 @@ void PlayState::loop() {
       new_pos = nave_pos - 5;
     }
 
-    boolean colision_futura = board.colision(new_pos, ROW_COLISION);
-    boolean colision_actual = board.colision(nave_pos, ROW_SHIP);
+    new_pos = (new_pos + SUBDEGREES) & SUBDEGREES_MASK;
 
-    if (!colision_futura || colision_actual) {
-      nave_pos = (new_pos + SUBDEGREES) & SUBDEGREES_MASK;
+    boolean colision_futura = board.colision(new_pos, ROW_COLISION);
+    if (!colision_futura) {
+      nave_pos = new_pos;
     }
   }
 
@@ -29,6 +30,9 @@ void PlayState::loop() {
   if (now > (last_step + step_delay)) {
     if (!board.colision(nave_pos, ROW_SHIP)) {
       board.step();
+    } else {
+      // crash boom bang
+      State::change_state(&gameover_state);
     }
     last_step = now;
   }

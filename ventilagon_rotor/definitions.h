@@ -45,7 +45,8 @@ class CircularBuffer {
   public:
     CircularBuffer();
     void reset();
-    void push(byte row);
+    void push_back(byte row);
+    void push_front(byte row);
     byte get_row(byte row_num);
 };
 
@@ -70,6 +71,7 @@ class Board {
     void fill_patterns();
     boolean colision(int pos, byte num_row);
     void step();
+    void step_back();
     void draw_column(byte column, Ledbar& ledbar);
 };
 
@@ -96,6 +98,7 @@ class State {
 
 class GameoverState : public State {
   protected:
+    bool keys_pressed;
   public:
     const char* name() {
       return "Game Over";
@@ -114,6 +117,15 @@ class PlayState : public State {
     void loop();
 };
 
+class ResettingState : public State {
+  public:
+    const char* name() {
+      return "Resetting";
+    }
+    void setup();
+    void loop();
+};
+
 class Ship {
   public:
     void init();
@@ -122,20 +134,28 @@ class Ship {
 };
 
 class Level {
-    const int speed;
-    const char* song;
-    const long color;
   public:
-    Level(int speed, char* song, long color) : speed(speed), song(song), color(color) {
+    const int speed;
+    const char song;
+    const long color;
+    Level(int speed, char song, long color) : speed(speed), song(song), color(color) {
     }
+};
+
+class Audio {
+  public:
+    void inline play_crash();
+    void inline play_song(char song);
 };
 
 extern Ledbar ledbar;
 extern Board board;
 extern Display display;
 extern Ship ship;
+extern Audio audio;
 extern GameoverState gameover_state;
 extern PlayState play_state;
+extern ResettingState resetting_state;
 extern const unsigned char PROGMEM transformations[];
 extern Level levels[];
 extern Level& current_level;

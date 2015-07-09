@@ -69,16 +69,14 @@ void serialEvent() {
         board.fill_patterns();
       }
       inChar = 0;
-    }
-
-    
+    }    
   }
 }
 
 void selectLevel(int level) {
-  // TODO
+  Level& current_level = levels[0];
+  State::change_state(&resetting_state);
 }
-
 
 void loop() {
   State::current_state->loop();

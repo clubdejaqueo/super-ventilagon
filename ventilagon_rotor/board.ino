@@ -12,7 +12,14 @@ void CircularBuffer::reset() {
   }
 }
 
-void CircularBuffer::push(byte row) {
+void CircularBuffer::push_front(byte row) {
+  cli();
+  buffer[first_row] = row;
+  first_row = (first_row - 1) % NUM_ROWS;
+  sei();
+}
+
+void CircularBuffer::push_back(byte row) {
   cli();
   buffer[first_row] = row;
   first_row = (first_row + 1) % NUM_ROWS;
@@ -39,7 +46,7 @@ void Board::fill_patterns() {
     pat.randomize(0);
 
     while (!pat.finished()) {
-      visible.push(pat.next_row());
+      visible.push_back(pat.next_row());
       row_num++;
       if (row_num == NUM_ROWS) {
         break;
@@ -59,11 +66,15 @@ boolean Board::colision(int pos, byte num_row) {
 }
 
 void Board::step() {
-  visible.push(pat.next_row());
+  visible.push_back(pat.next_row());
 
   if (pat.finished()) {
     pat.randomize(99);
   }
+}
+
+void Board::step_back() {
+  visible.push_front(0);
 }
 
 void Board::draw_column(byte column, Ledbar& ledbar) {
