@@ -40,7 +40,6 @@ void Display::tick(unsigned long now) {
 
   if (current_column != last_column_drawn) {
     board.draw_column(current_column, ledbar);
-    ledbar.update();
   }
 }
 

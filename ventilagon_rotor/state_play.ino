@@ -7,7 +7,6 @@ void PlayState::setup() {
 void PlayState::loop() {
   unsigned long now = micros();
 
-
   if (boton_cw || boton_ccw) {
     int new_pos;
 
@@ -50,5 +49,3 @@ void PlayState::loop() {
 
   //colorizer.step();
 }
-
-
