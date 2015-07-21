@@ -3,6 +3,20 @@ PlayState play_state;
 void PlayState::setup() {
   board.reset();
   audio.play_song(current_level.song);
+  current_section = 0;
+}
+
+int PlayState::get_section_for_time(unsigned long now) {
+  return 0;
+}
+
+void PlayState::check_section(unsigned long now) {
+  if (get_section_for_time(now) > current_section) {
+    advance_section();
+  }
+}
+
+void PlayState::advance_section() {
 }
 
 void PlayState::loop() {
@@ -36,6 +50,8 @@ void PlayState::loop() {
     }
     last_step = now;
   }
+
+  check_section(now);
 
   display.tick(now);
 

@@ -110,6 +110,11 @@ class GameoverState : public State {
 
 class PlayState : public State {
   public:
+    int current_section;
+    int get_section_for_time(unsigned long now);
+    void check_section(unsigned long now);
+    void advance_section();
+
     const char* name() {
       return "Running Game";
     }
