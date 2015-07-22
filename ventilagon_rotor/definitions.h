@@ -101,7 +101,7 @@ class GameoverState : public State {
     bool keys_pressed;
   public:
     const char* name() {
-      return "Game Over";
+      return "GAME OVER";
     }
     void apagar_todo();
     void setup();
@@ -116,7 +116,7 @@ class PlayState : public State {
     void advance_section();
 
     const char* name() {
-      return "Running Game";
+      return "RUNNING GAME";
     }
     void setup();
     void loop();
@@ -124,8 +124,10 @@ class PlayState : public State {
 
 class ResettingState : public State {
   public:
+    long int last_step;
+    byte counter;
     const char* name() {
-      return "Resetting";
+      return "RESETTING";
     }
     void setup();
     void loop();
@@ -140,16 +142,20 @@ class Ship {
 
 class Level {
   public:
-    const int speed;
-    const char song;
-    const long color;
-    Level(int speed, char song, long color) : speed(speed), song(song), color(color) {
+    int speed;
+    char song;
+    long color;
+    long calibrate_color;
+    Level(int speed, char song, long color, long calibrate_color) : 
+      speed(speed), song(song), color(color), calibrate_color(calibrate_color){
     }
 };
 
 class Audio {
   public:
     void inline play_crash();
+    void inline begin();
+    void inline stop_song();
     void inline play_song(char song);
 };
 
@@ -164,5 +170,6 @@ extern ResettingState resetting_state;
 extern const unsigned char PROGMEM transformations[];
 extern Level levels[];
 extern Level& current_level;
+extern byte new_level;
 
 #define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)

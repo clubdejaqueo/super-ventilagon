@@ -1,18 +1,28 @@
 ResettingState resetting_state;
 
+const unsigned long reset_step_delay = (10L * 100 * 1000) / NUM_ROWS;
+
+
 void ResettingState::setup() {
-  // nada
+  last_step = micros();
+  counter = 0;
+  audio.stop_song();
 }
 
 void ResettingState::loop() {
-  // TODO
-  // tirar las lineas para afuera durante medio segundo
-  // board.step_back();
   unsigned long now = micros();
   display.tick(now);
   
-  // TODO
-  // despues de medio segundo, arrancar el juego
-  State::change_state(&play_state);
+  // tirar las lineas para afuera durante medio segundo
+  if ((now - last_step) > reset_step_delay) {
+    board.step_back();
+    last_step = now;
+    counter++;
+  }
 
+  // despues de medio segundo, arrancar el juego
+  if (counter > NUM_ROWS) {
+    current_level = levels[new_level];
+    State::change_state(&play_state);
+  }
 }

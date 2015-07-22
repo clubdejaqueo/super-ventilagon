@@ -11,7 +11,6 @@ void handle_interrupt() {
   unsigned long this_turn = micros();
   last_turn_duration = this_turn - last_turn;
   last_turn = this_turn;
-  debugln("int");
 }
 
 unsigned long last_step = 0;
@@ -62,7 +61,7 @@ void serialEvent() {
         selectLevel(inChar - '1');
       }
       if (inChar == ' ') {
-        Serial.print("velocidad:");
+        Serial.print("VELOCIDAD:");
         Serial.println(last_turn_duration);
       }
       if (inChar == 'n') {
@@ -73,8 +72,9 @@ void serialEvent() {
   }
 }
 
-void selectLevel(int level) {
-  Level& current_level = levels[0];
+void selectLevel(byte level) {
+  new_level = level;
+  audio.play_crash();
   State::change_state(&resetting_state);
 }
 

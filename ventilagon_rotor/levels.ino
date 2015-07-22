@@ -1,10 +1,11 @@
 Level levels[] = {
-  Level(1, 'a', 0x00ffff),
-  Level(2, 'b', 0xff00ff),
-  Level(3, 'c', 0xffff00),
-  Level(4, 'd', 0x0000ff),
-  Level(5, 'e', 0x00ff00),
-  Level(6, 'f', 0xff0000),
+  Level(1, '1', 0x00ffff, 0xff0000),
+  Level(2, '2', 0xff00ff, 0xff0000),
+  Level(3, '3', 0xffff00, 0xff0000),
+  Level(4, '1', 0x0000ff, 0xff0000),
+  Level(5, '2', 0x00ff00, 0xff0000),
+  Level(6, '3', 0xffffff, 0xff0000),
 };
 
 Level& current_level = levels[0];
+byte new_level = 0;

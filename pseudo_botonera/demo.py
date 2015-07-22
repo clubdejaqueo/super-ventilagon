@@ -17,10 +17,10 @@ ports = list_ports.comports()
 for name, desc, hwid in ports:
     print name
 
-#wixel = serial.Serial(port=ports[0][0], baudrate=57600, timeout=0)
+wixel = serial.Serial(port=ports[2][0], baudrate=57600, timeout=0)
 #wixel.open()
 
-wixel = sys.stdout
+#wixel = sys.stdout
 
 # ------
 # pygame
@@ -49,18 +49,20 @@ def received(char):
         sounds[char].play()
 
 while 1:
-#    while wixel.inWaiting():
-#        c = wixel.read()
-#        received(c)
+    while wixel.inWaiting():
+        c = wixel.read()
+        print c,
+        received(c)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             if pygame.K_1 <= event.key <= pygame.K_6:
-                level = event.key - pygame.K_1
+                level = event.key - pygame.K_1 + 1
                 char = chr(ord("0") + level)
                 send(char)
-                received(char)
+                print "\nSelecting level", char
+#                received(char)
             if pygame.K_a <= event.key < (pygame.K_a + len(sounds)):
                 n = event.key - pygame.K_a
                 char = chr(ord("a") + n)

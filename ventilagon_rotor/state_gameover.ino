@@ -2,6 +2,7 @@ GameoverState gameover_state;
 
 void GameoverState::setup() {
   audio.play_crash();
+  audio.stop_song();
   keys_pressed = (boton_cw || boton_ccw);
 }
 

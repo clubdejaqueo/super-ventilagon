@@ -13,7 +13,7 @@ void Ledbar::setPixelColor(int pixel, long color) {
 }
 
 void Ledbar::init() {
-  debugln("Init ledbar");
+  debugln("INIT LEDBAR");
   Tlc.init();
   clear();
 }
@@ -23,15 +23,13 @@ void Ledbar::clear() {
 }
 
 const long BLACK = 0x000000;
-const long WALL_COLOR = 0x00ffff;
-const long CALIBRATE_COLOR = 0xff0000;
 
 void Ledbar::draw(byte num_row, boolean value) {
   long color;
   if (num_row == ROW_SHIP) {
-    color = value ? CALIBRATE_COLOR : BLACK;
+    color = value ? current_level.calibrate_color : BLACK;
   } else {
-    color = value ? WALL_COLOR : BLACK;
+    color = value ? current_level.color : BLACK;
   }
   setPixelColor(num_row, color);
 //  debug("row: ");

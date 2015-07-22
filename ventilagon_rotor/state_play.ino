@@ -2,6 +2,7 @@ PlayState play_state;
 
 void PlayState::setup() {
   board.reset();
+  audio.begin();
   audio.play_song(current_level.song);
   current_section = 0;
 }
