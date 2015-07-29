@@ -41,14 +41,19 @@ def send(what):
     wixel.flush()
 
 def received(char):
-    if "0" <= char <= "5":
-        pygame.mixer.music.load("music/music%s.ogg" % char)
-        pygame.mixer.music.play()
+    if "0" == char:
+        pygame.mixer.music.stop()
+
+    if "1" <= char <= "3":
+        print "loading music", char
+        pygame.mixer.music.load("music/ventilagon%s.wav" % char)
+        pygame.mixer.music.play(-1)
 
     if "a" <= char <= chr(ord("a") + len(sounds)):
         sounds[char].play()
 
-while 1:
+running = True
+while running:
     while wixel.inWaiting():
         c = wixel.read()
         print c,
@@ -67,6 +72,10 @@ while 1:
                 n = event.key - pygame.K_a
                 char = chr(ord("a") + n)
                 received(char)
+            if event.type == pygame.QUIT:
+                running = False
+            if event.key == pygame.K_q:
+                running = False
             if event.key == pygame.K_LEFT:
                 send("L")
             if event.key == pygame.K_RIGHT:
@@ -77,3 +86,5 @@ while 1:
             if event.key == pygame.K_RIGHT:
                 send("r")
     pygame.display.flip()
+
+pygame.quit()

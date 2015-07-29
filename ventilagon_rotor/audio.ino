@@ -4,6 +4,10 @@ void Audio::play_crash() {
   Serial.print("c");
 }
 
+void Audio::play_game_over() {
+  Serial.print("e");
+}
+
 void Audio::stop_song() {
   Serial.print("0");
 }

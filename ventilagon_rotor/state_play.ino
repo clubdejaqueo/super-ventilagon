@@ -35,8 +35,8 @@ void PlayState::loop() {
 
     new_pos = (new_pos + SUBDEGREES) & SUBDEGREES_MASK;
 
-    boolean colision_futura = board.colision(new_pos, ROW_COLISION);
-    if (!colision_futura) {
+    boolean colision_futura = board.colision(new_pos, ROW_SHIP);
+    if (!colision_futura || 1) {
       nave_pos = new_pos;
     }
   }

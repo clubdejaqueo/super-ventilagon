@@ -19,7 +19,7 @@ const byte ROW_COLISION = 7;
 const int SUBDEGREES = 8192;
 const int SUBDEGREES_MASK = 8191;
 const int SHIP_WIDTH = 272;
-const byte DEFAULT_BLOCK_HEIGHT = 4;
+const byte DEFAULT_BLOCK_HEIGHT = 6;
 
 class BasePattern;
 
@@ -154,6 +154,7 @@ class Level {
 class Audio {
   public:
     void inline play_crash();
+    void inline play_game_over();
     void inline begin();
     void inline stop_song();
     void inline play_song(char song);
