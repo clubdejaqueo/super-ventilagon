@@ -2,7 +2,7 @@
  
 Servo myservo;
 
-int resistencias[] = {0, 203, 409, 615, 819, 1023};
+//int resistencias[] = {0, 203, 409, 615, 819, 1023};
 
 void setup() 
 { 
@@ -13,8 +13,6 @@ void setup()
 void loop() 
 { 
   int v = analogRead(A0);    
-  int s = map(v, 0, 1023, 30, 120);
-  myservo.write(s);
   
   int k;
   if (v < 100) {
@@ -31,6 +29,9 @@ void loop()
     k = 0;
   }
   
+  int s = map(k, 0, 5, 30, 120);
+  myservo.write(s);
+
   Serial.println(k);
   delay(50);
 }
