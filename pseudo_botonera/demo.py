@@ -5,20 +5,26 @@ import pygame
 import serial
 import sys
 
-from serial.tools import list_ports
+#from serial.tools import list_ports
 
 size = width, height = 640, 480
-white = (255, 255, 255)
+black = (0, 0, 0)
+
+ARDUINO = "/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_753383235353518141E1-if00"
+WIXEL = "/dev/serial/by-id/usb-Pololu_Corporation_Wixel_52-C6-A2-41-if00"
 
 # ------
 # serial
 
-ports = list_ports.comports()
-for name, desc, hwid in ports:
-    print name
+#ports = list_ports.comports()
+#for name, desc, hwid in ports:
+    #print name
 
-wixel = serial.Serial(port=ports[2][0], baudrate=57600, timeout=0)
-#wixel.open()
+wixel = serial.Serial(WIXEL, baudrate=57600, timeout=0)
+wixel.open()
+
+arduino = serial.Serial(ARDUINO, baudrate=57600, timeout=0)
+arduino.open()
 
 #wixel = sys.stdout
 
@@ -28,10 +34,10 @@ wixel = serial.Serial(port=ports[2][0], baudrate=57600, timeout=0)
 pygame.mixer.pre_init(44100)
 pygame.init()
 screen = pygame.display.set_mode(size)
-screen.fill(white)
+screen.fill(black)
 
 sounds = {}
-for n, filename in enumerate(os.listdir("audio")):
+for n, filename in enumerate(sorted(os.listdir("audio"))):
     char = chr(ord("a") + n)
     sounds[char] = pygame.mixer.Sound("audio/%s" % filename)
     print "%s) %s" % (char, filename)
@@ -52,8 +58,16 @@ def received(char):
     if "a" <= char <= chr(ord("a") + len(sounds)):
         sounds[char].play()
 
-running = True
-while running:
+selected_level = "0"
+
+while 1:
+    while arduino.inWaiting():
+        c = arduino.read()
+	if c in "012345":
+	    if selected_level != c:
+	        selected_level = c
+	        print "\nSelecting level", c
+	        send(c)
     while wixel.inWaiting():
         c = wixel.read()
         print c,
@@ -72,19 +86,14 @@ while running:
                 n = event.key - pygame.K_a
                 char = chr(ord("a") + n)
                 received(char)
-            if event.type == pygame.QUIT:
-                running = False
-            if event.key == pygame.K_q:
-                running = False
-            if event.key == pygame.K_LEFT:
+            if event.key in (pygame.K_LEFT, pygame.K_9):
                 send("L")
-            if event.key == pygame.K_RIGHT:
+            if event.key in (pygame.K_RIGHT, pygame.K_7):
                 send("R")
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:
+            if event.key in (pygame.K_LEFT, pygame.K_9):
                 send("l")
-            if event.key == pygame.K_RIGHT:
+            if event.key in (pygame.K_RIGHT, pygame.K_7):
                 send("r")
+    
     pygame.display.flip()
-
-pygame.quit()
