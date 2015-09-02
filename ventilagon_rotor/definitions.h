@@ -1,6 +1,7 @@
 #include <Arduino.h>
 
 #define DEBUG
+
 #ifdef DEBUG
 #define debug Serial.print
 #define debugln Serial.println
@@ -110,10 +111,11 @@ class GameoverState : public State {
 
 class PlayState : public State {
   public:
-    int current_section;
-    int get_section_for_time(unsigned long now);
+    int section;
+    unsigned long section_init_time;
+    unsigned long section_duration;
     void check_section(unsigned long now);
-    void advance_section();
+    void advance_section(unsigned long now);
 
     const char* name() {
       return "RUNNING GAME";

@@ -1,3 +1,22 @@
+/*
+a) awesome.wav
+b) begin.wav
+c) die.wav
+d) excellent.wav
+e) gameover.wav
+f) hexagon.wav
+g) line.wav
+h) menuchoose.wav
+i) menuselect.wav
+j) pentagon.wav
+k) rankup.wav
+l) square.wav
+m) start.wav
+n) superhexagon.wav
+o) triangle.wav
+p) wonderful.wav
+*/
+
 Audio audio;
 
 void Audio::play_crash() {

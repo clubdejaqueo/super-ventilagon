@@ -1,23 +1,42 @@
+#include <limits.h>
+
 PlayState play_state;
+
+#define SECONDS (1000 * 1000) // in microseconds
+
+unsigned long section_durations[] = {
+  10 * SECONDS,
+  10 * SECONDS,
+  10 * SECONDS,
+  15 * SECONDS,
+  15 * SECONDS,
+  ULONG_MAX
+};
+
+char section_sounds[] = {
+  '-', 'g', 'o', 'l', 'j', 'f'
+};
 
 void PlayState::setup() {
   board.reset();
   audio.begin();
   audio.play_song(current_level.song);
-  current_section = 0;
-}
-
-int PlayState::get_section_for_time(unsigned long now) {
-  return 0;
+  section = 0;
+  section_init_time = micros();
+  section_duration = section_durations[section];
 }
 
 void PlayState::check_section(unsigned long now) {
-  if (get_section_for_time(now) > current_section) {
-    advance_section();
+  if (now - section_init_time > section_duration) {
+    advance_section(now);
   }
 }
 
-void PlayState::advance_section() {
+void PlayState::advance_section(unsigned long now) {
+  section++;
+  section_init_time = now;
+  section_duration = section_durations[section];
+  audio.play_song(section_sounds[section]);
 }
 
 void PlayState::loop() {
@@ -52,10 +71,9 @@ void PlayState::loop() {
     last_step = now;
   }
 
-  check_section(now);
-
   display.tick(now);
 
+  check_section(now);
   /*
   while (1) {
     int wait = micros()-(loop_start+slice);
@@ -70,3 +88,4 @@ void PlayState::loop() {
 
   //colorizer.step();
 }
+
