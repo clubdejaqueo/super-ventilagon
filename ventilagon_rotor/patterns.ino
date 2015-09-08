@@ -1,31 +1,47 @@
+// Roughly based on: "Super Hexagon 101 : Know your Patterns"
+// http://steamcommunity.com/sharedfiles/filedetails/?id=121153531
 
-// 20 rows
-const unsigned char PROGMEM pat0[] = {
+#define PATTERN const unsigned char PROGMEM
+
+PATTERN solo_A[] = {
+  0B010101,
   0B000000,
-  0B100111,
-  0B110011,
-  0B111001,
-  0B111100,
-  0B011110,
-  0B001111,
-  0B100111,
-  0B110011,
-  0B111001,
-  0B111100,
-  0B011110,
-  0B001111,
-  0B100111,
-  0B110011,
-  0B111001,
-  0B111100,
-  0B011110,
-  0B001111,
+  0B010101,
   0B000000,
+  0B000000,
+  0B000000,
+  0B111011,
 };
 
-// 12 rows
-const unsigned char PROGMEM pat1[] = {
+PATTERN solo_B[] = {
+  0B010101,
+  0B010101,
   0B000000,
+  0B000000,
+  0B000000,
+  0B111011,
+};
+
+PATTERN solo_C[] = {
+  0B010010,
+  0B000000,
+  0B010010,
+  0B000000,
+  0B000000,
+  0B000000,
+  0B111011,
+};
+
+PATTERN solo_D[] = {
+  0B010010,
+  0B010010,
+  0B000000,
+  0B000000,
+  0B000000,
+  0B111011,
+};
+
+PATTERN triple_C[] = {
   0B101111,
   0B000000,
   0B000000,
@@ -35,52 +51,188 @@ const unsigned char PROGMEM pat1[] = {
   0B000000,
   0B000000,
   0B101111,
-  0B000000,
-  0B000000,
 };
 
-// 11 rows
-const unsigned char PROGMEM pat2[] = {
-  0B000000,
+PATTERN bat[] = {
+  0B011111,
+  0B001110,
+  0B001110,
+  0B001110,
+  0B000100,
+  0B100100,
+  0B100100,
+  0B110001,
+  0B110001,
+  0B111011,
+  0B111011,
+  0B010001,
+};
+
+PATTERN whirpool[] = {
+  0B011111,
+  0B001111,
+  0B000111,
+  0B000011,
+  0B100001,
+  0B110000,
+  0B011000,
+  0B001100,
+  0B000110,
+  0B000011,
+  0B100001,
+  0B110000,
+  0B111000,
+  0B111100,
+  0B111110,
+};
+
+PATTERN double_whirpool[] = {
   0B110110,
+  0B010010,
+  0B001001,
+  0B100100,
+  0B010010,
+  0B001001,
+  0B100100,
+  0B010010,
+  0B011011,
+};
+
+PATTERN three_21[] = {
+  0B110111,
+  0B000000,
+  0B000000,
+  0B000000,
+  0B011100,
+  0B111110,
+  0B111110,
+  0B001000,
+  0B001000,
+  0B001001,
+  0B101011,
+  0B101011,
+  0B001001,
+  0B001001,
+  0B011101,
+  0B011101,
+};
+
+PATTERN ladder[] = {
+  0B110110,
+  0B010010,
   0B010010,
   0B011011,
   0B010010,
+  0B010010,
   0B110110,
+  0B010010,
   0B010010,
   0B011011,
   0B010010,
+  0B010010,
   0B110110,
-  0B000000,
 };
 
-// 10 rows
-const unsigned char PROGMEM pat3[] = {
+PATTERN four_spin[] = {
+  0B011111,  
+  0B000001,
+  0B000001,
+  0B000001,
+  0B000001,
+  0B000001,
+  0B111101,
+  0B000001,
+  0B000001,
+  0B000001,
+  0B000001,
+  0B000001,
+  0B011111,  
+};
+
+PATTERN three_spin[] = {
+  0B111101,
+  0B100001,
+  0B100001,
+  0B100001,
+  0B101111,
+  0B100111,
+  0B100011,
+  0B100001,
+  0B100001,
+  0B111101,
+  0B111001,
+  0B110001,
+  0B100001,  
+  0B100001,  
+  0B101111,
+  0B100111,
+  0B100011,
+  0B100001,
+  0B100001,
+  0B111101,
+  0B111001,
+  0B110001,
+};
+
+PATTERN two_spin[] = {
+  0B111100,
+  0B100000,
+  0B100000,
+  0B100111,
+  0B100000,
+  0B100000,
+  0B111100,
+  0B100000,
+  0B100000,
+  0B100111,
+  0B100000,
+  0B100000,
+  0B111100,
+  0B100000,
+  0B100000,
+  0B100111,
+  0B100000,
+  0B100000,
+};
+
+PATTERN multi_C[] = {
+  0B011111,
   0B000000,
   0B000000,
-  0B010010,
+  0B101111,
+  0B000000,
+  0B000000,
+  0B110111,
+  0B000000,
+  0B000000,
+  0B111011,
+  0B000000,
+  0B000000,
+  0B111101,
+  0B000000,
+  0B000000,
+  0B111110,
+};
+
+PATTERN rain[] = {
+  0B010101,
+  0B000000,
   0B000000,
   0B101010,
   0B000000,
+  0B000000,
   0B010101,
   0B000000,
-  0B101110,
   0B000000,
+  0B101010,
+  0B000000,
+  0B000000,
+  0B010101,
+  0B000000,
+  0B000000,
+  0B101010,
+  0B101010,
 };
-
-// 9 rows
-const unsigned char PROGMEM pat4[] = {
-  0B000000,
-  0B000001,
-  0B000010,
-  0B000100,
-  0B001000,
-  0B010000,
-  0B100000,
-  0B000000,
-  0B000000,
-};
-
 
 class BasePattern {
   public:
@@ -95,13 +247,34 @@ class BasePattern {
     }
 };
 
-BasePattern all_patterns[] = {
-  BasePattern(sizeof(pat0), pat0),
-  BasePattern(sizeof(pat1), pat1),
-  BasePattern(sizeof(pat2), pat2),
-  BasePattern(sizeof(pat3), pat3),
-  BasePattern(sizeof(pat4), pat4),
+BasePattern patterns_level1[] = {
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(whirpool), whirpool),
+  BasePattern(sizeof(bat), bat),
+  BasePattern(sizeof(ladder), ladder),
 };
+
+BasePattern patterns_level2[] = {
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(multi_C), multi_C),
+  BasePattern(sizeof(double_whirpool), double_whirpool),
+  BasePattern(sizeof(bat), bat),
+  BasePattern(sizeof(three_21), three_21),
+  BasePattern(sizeof(ladder), ladder),
+  BasePattern(sizeof(two_spin), two_spin),
+  BasePattern(sizeof(three_spin), three_spin),
+  BasePattern(sizeof(four_spin), four_spin),
+  BasePattern(sizeof(rain), rain),
+};
+
 
 Pattern::Pattern() : base(choose_random()) {
   block_height = DEFAULT_BLOCK_HEIGHT;
@@ -113,7 +286,7 @@ BasePattern& Pattern::choose_random() {
   current_height = block_height;
   row = 0;
   transformation_base = transformations + (random(0, 12) << 6);
-  BasePattern& base = all_patterns[random(0, elements_in(all_patterns))];
+  BasePattern& base = patterns_level1[random(0, elements_in(patterns_level1))];
   base_len = base.len;
   return base;
 }
