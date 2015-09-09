@@ -2,6 +2,7 @@
 // http://steamcommunity.com/sharedfiles/filedetails/?id=121153531
 
 #define PATTERN const unsigned char PROGMEM
+#define END 0,0,0
 
 PATTERN solo_A[] = {
   0B010101,
@@ -11,6 +12,7 @@ PATTERN solo_A[] = {
   0B000000,
   0B000000,
   0B111011,
+  END
 };
 
 PATTERN solo_B[] = {
@@ -20,6 +22,7 @@ PATTERN solo_B[] = {
   0B000000,
   0B000000,
   0B111011,
+  END
 };
 
 PATTERN solo_C[] = {
@@ -30,6 +33,7 @@ PATTERN solo_C[] = {
   0B000000,
   0B000000,
   0B111011,
+  END
 };
 
 PATTERN solo_D[] = {
@@ -39,6 +43,7 @@ PATTERN solo_D[] = {
   0B000000,
   0B000000,
   0B111011,
+  END
 };
 
 PATTERN triple_C[] = {
@@ -51,6 +56,7 @@ PATTERN triple_C[] = {
   0B000000,
   0B000000,
   0B101111,
+  END
 };
 
 PATTERN bat[] = {
@@ -66,6 +72,7 @@ PATTERN bat[] = {
   0B111011,
   0B111011,
   0B010001,
+  END
 };
 
 PATTERN whirpool[] = {
@@ -84,6 +91,7 @@ PATTERN whirpool[] = {
   0B111000,
   0B111100,
   0B111110,
+  END
 };
 
 PATTERN double_whirpool[] = {
@@ -96,6 +104,7 @@ PATTERN double_whirpool[] = {
   0B100100,
   0B010010,
   0B011011,
+  END
 };
 
 PATTERN three_21[] = {
@@ -115,6 +124,7 @@ PATTERN three_21[] = {
   0B001001,
   0B011101,
   0B011101,
+  END
 };
 
 PATTERN ladder[] = {
@@ -131,6 +141,7 @@ PATTERN ladder[] = {
   0B010010,
   0B010010,
   0B110110,
+  END
 };
 
 PATTERN four_spin[] = {
@@ -147,6 +158,7 @@ PATTERN four_spin[] = {
   0B000001,
   0B000001,
   0B011111,  
+  END
 };
 
 PATTERN three_spin[] = {
@@ -172,6 +184,7 @@ PATTERN three_spin[] = {
   0B111101,
   0B111001,
   0B110001,
+  END
 };
 
 PATTERN two_spin[] = {
@@ -193,6 +206,7 @@ PATTERN two_spin[] = {
   0B100111,
   0B100000,
   0B100000,
+  END
 };
 
 PATTERN multi_C[] = {
@@ -212,6 +226,7 @@ PATTERN multi_C[] = {
   0B000000,
   0B000000,
   0B111110,
+  END
 };
 
 PATTERN rain[] = {
@@ -232,6 +247,7 @@ PATTERN rain[] = {
   0B000000,
   0B101010,
   0B101010,
+  END
 };
 
 class BasePattern {
