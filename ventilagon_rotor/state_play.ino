@@ -2,7 +2,7 @@
 
 PlayState play_state;
 
-#define SECONDS (1000 * 1000) // in microseconds
+#define SECONDS (1000UL * 1000UL) // in microseconds
 
 unsigned long section_durations[] = {
   10 * SECONDS,
