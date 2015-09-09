@@ -2,6 +2,7 @@
 
 
 int nave_pos = 360;
+int nave_calibrate = -478;
 
 
 volatile unsigned long last_turn = 0;

@@ -11,6 +11,9 @@ void Display::adjust_drift() {
 }
 
 bool Display::ship_on(int current_pos) {
+  if (calibrating) {
+    return board.colision(current_pos, ROW_SHIP);
+  }
   if (abs(nave_pos - current_pos) < (SHIP_WIDTH / 2)) {
     return true;
   }
@@ -41,5 +44,9 @@ void Display::tick(unsigned long now) {
   if (current_column != last_column_drawn) {
     board.draw_column(current_column, ledbar);
   }
+}
+
+void Display::calibrate(bool calibrating) {
+  this->calibrating = calibrating;
 }
 

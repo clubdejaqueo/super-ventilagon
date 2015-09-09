@@ -80,11 +80,13 @@ class Display {
     int last_column_drawn;
     int drift_pos;
     int drift_speed;
+    bool calibrating;
   public:
-    Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0) {
+    Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0), calibrating(false) {
     }
     void adjust_drift();
     void tick(unsigned long now);
+    void calibrate(bool calibrating);
     bool ship_on(int current_pos);
 };
 

@@ -20,6 +20,7 @@ char section_sounds[] = {
 void PlayState::setup() {
   board.reset();
   audio.begin();
+  display.calibrate(false);
   audio.play_song(current_level.song);
   section = 0;
   section_init_time = micros();
