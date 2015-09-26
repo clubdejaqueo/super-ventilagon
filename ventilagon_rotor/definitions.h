@@ -20,7 +20,7 @@ const byte ROW_COLISION = 7;
 const int SUBDEGREES = 8192;
 const int SUBDEGREES_MASK = 8191;
 const int SHIP_WIDTH = 272;
-const byte DEFAULT_BLOCK_HEIGHT = 6;
+const byte DEFAULT_BLOCK_HEIGHT = 3;
 
 class BasePattern;
 
