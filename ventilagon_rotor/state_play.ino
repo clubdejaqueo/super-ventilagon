@@ -18,6 +18,7 @@ char section_sounds[] = {
 };
 
 void PlayState::setup() {
+  paused = false;
   board.reset();
   audio.begin();
   display.calibrate(false);
@@ -43,14 +44,14 @@ void PlayState::advance_section(unsigned long now) {
 void PlayState::loop() {
   unsigned long now = micros();
 
-  if (boton_cw || boton_ccw) {
+  if (boton_cw != boton_ccw) {
     int new_pos;
 
     if (boton_cw) {
-      new_pos = nave_pos + 5;
+      new_pos = nave_pos + 1;
     }
     if (boton_ccw) {
-      new_pos = nave_pos - 5;
+      new_pos = nave_pos - 1;
     }
 
     new_pos = (new_pos + SUBDEGREES) & SUBDEGREES_MASK;
@@ -64,7 +65,9 @@ void PlayState::loop() {
 
   if (now > (last_step + step_delay)) {
     if (!board.colision(nave_pos, ROW_SHIP)) {
-      board.step();
+      if (!paused) {
+        board.step();
+      }
     } else {
       // crash boom bang
       State::change_state(&gameover_state);
@@ -73,6 +76,7 @@ void PlayState::loop() {
   }
 
   display.tick(now);
+  //display.adjust_drift();
 
   check_section(now);
   /*

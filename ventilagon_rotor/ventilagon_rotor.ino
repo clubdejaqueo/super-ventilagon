@@ -55,6 +55,9 @@ void serialEvent() {
       case 'r':
         boton_cw = false;
         break;
+      case ' ':
+        play_state.toggle_pause();
+        break;
     }
 
     if (inChar != 0) {

@@ -116,11 +116,16 @@ class PlayState : public State {
     int section;
     unsigned long section_init_time;
     unsigned long section_duration;
+    bool paused;
+    
     void check_section(unsigned long now);
     void advance_section(unsigned long now);
 
     const char* name() {
       return "RUNNING GAME";
+    }
+    void toggle_pause() {
+      paused = !paused;
     }
     void setup();
     void loop();
@@ -138,6 +143,7 @@ class ResettingState : public State {
 };
 
 class Ship {
+    bool on;
   public:
     void init();
     void prender();

@@ -11,7 +11,7 @@ size = width, height = 640, 480
 black = (0, 0, 0)
 
 ARDUINO = "/dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_753383235353518141E1-if00"
-WIXEL = "/dev/serial/by-id/usb-Pololu_Corporation_Wixel_52-C6-A2-41-if00"
+WIXEL = "/dev/tty.usbmodemfd121"
 
 # ------
 # serial
@@ -21,10 +21,9 @@ WIXEL = "/dev/serial/by-id/usb-Pololu_Corporation_Wixel_52-C6-A2-41-if00"
     #print name
 
 wixel = serial.Serial(WIXEL, baudrate=57600, timeout=0)
-wixel.open()
 
-arduino = serial.Serial(ARDUINO, baudrate=57600, timeout=0)
-arduino.open()
+#arduino = serial.Serial(ARDUINO, baudrate=57600, timeout=0)
+#arduino.open()
 
 #wixel = sys.stdout
 
@@ -60,9 +59,8 @@ def received(char):
 
 selected_level = "0"
 
-running = True
-
-while running:
+while 1:
+    """
     while arduino.inWaiting():
         c = arduino.read()
 	if c in "012345":
@@ -70,16 +68,15 @@ while running:
 	        selected_level = c
 	        print "\nSelecting level", c
 	        send(c)
+    """
     while wixel.inWaiting():
         c = wixel.read()
         print c,
         received(c)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            sys.exit()
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_q:
-                running = False
             if pygame.K_1 <= event.key <= pygame.K_6:
                 level = event.key - pygame.K_1 + 1
                 char = chr(ord("0") + level)
@@ -90,6 +87,8 @@ while running:
                 n = event.key - pygame.K_a
                 char = chr(ord("a") + n)
                 received(char)
+            if event.key == pygame.K_SPACE:
+                send(" ")
             if event.key in (pygame.K_LEFT, pygame.K_9):
                 send("L")
             if event.key in (pygame.K_RIGHT, pygame.K_7):
