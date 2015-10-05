@@ -278,13 +278,85 @@ BasePattern patterns_level2[] = {
   BasePattern(sizeof(rain), rain),
 };
 
+BasePattern patterns_level3[] = {
+  // TODO: fixme
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(multi_C), multi_C),
+  BasePattern(sizeof(double_whirpool), double_whirpool),
+  BasePattern(sizeof(bat), bat),
+  BasePattern(sizeof(three_21), three_21),
+  BasePattern(sizeof(ladder), ladder),
+  BasePattern(sizeof(two_spin), two_spin),
+  BasePattern(sizeof(three_spin), three_spin),
+  BasePattern(sizeof(four_spin), four_spin),
+  BasePattern(sizeof(rain), rain),
+};
+
+BasePattern patterns_level4[] = {
+  // TODO: fixme
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(multi_C), multi_C),
+  BasePattern(sizeof(double_whirpool), double_whirpool),
+  BasePattern(sizeof(bat), bat),
+  BasePattern(sizeof(three_21), three_21),
+  BasePattern(sizeof(ladder), ladder),
+  BasePattern(sizeof(two_spin), two_spin),
+  BasePattern(sizeof(three_spin), three_spin),
+  BasePattern(sizeof(four_spin), four_spin),
+  BasePattern(sizeof(rain), rain),
+};
+
+BasePattern patterns_level5[] = {
+  // TODO: fixme
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(multi_C), multi_C),
+  BasePattern(sizeof(double_whirpool), double_whirpool),
+  BasePattern(sizeof(bat), bat),
+  BasePattern(sizeof(three_21), three_21),
+  BasePattern(sizeof(ladder), ladder),
+  BasePattern(sizeof(two_spin), two_spin),
+  BasePattern(sizeof(three_spin), three_spin),
+  BasePattern(sizeof(four_spin), four_spin),
+  BasePattern(sizeof(rain), rain),
+};
+
+BasePattern patterns_level6[] = {
+  // TODO: fixme
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(multi_C), multi_C),
+  BasePattern(sizeof(double_whirpool), double_whirpool),
+  BasePattern(sizeof(bat), bat),
+  BasePattern(sizeof(three_21), three_21),
+  BasePattern(sizeof(ladder), ladder),
+  BasePattern(sizeof(two_spin), two_spin),
+  BasePattern(sizeof(three_spin), three_spin),
+  BasePattern(sizeof(four_spin), four_spin),
+  BasePattern(sizeof(rain), rain),
+};
+
 Level levels[] = {
   Level(1, '1', 0x00ffff, 0xff0000, patterns_level1, elements_in(patterns_level1)),
   Level(2, '2', 0xff00ff, 0xff0000, patterns_level2, elements_in(patterns_level2)),
-  Level(3, '3', 0xffff00, 0xff0000, patterns_level1, elements_in(patterns_level1)),
-  Level(4, '1', 0x0000ff, 0xff0000, patterns_level1, elements_in(patterns_level1)),
-  Level(5, '2', 0x00ff00, 0xff0000, patterns_level2, elements_in(patterns_level2)),
-  Level(6, '3', 0xffffff, 0xff0000, patterns_level1, elements_in(patterns_level1)),
+  Level(3, '3', 0xffff00, 0xff0000, patterns_level3, elements_in(patterns_level3)),
+  Level(4, '1', 0x0000ff, 0xff0000, patterns_level4, elements_in(patterns_level4)),
+  Level(5, '2', 0x00ff00, 0xff0000, patterns_level5, elements_in(patterns_level5)),
+  Level(6, '3', 0xffffff, 0xff0000, patterns_level6, elements_in(patterns_level6)),
 };
 
 Level& current_level = levels[0];

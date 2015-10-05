@@ -35,9 +35,6 @@ class BasePattern {
     }
 };
 
-extern BasePattern patterns_level1[];
-extern BasePattern patterns_level2[];
-
 class Pattern {
     BasePattern& base;
     const unsigned char PROGMEM* transformation_base;
