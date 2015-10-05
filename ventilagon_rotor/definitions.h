@@ -22,7 +22,21 @@ const int SUBDEGREES_MASK = 8191;
 const int SHIP_WIDTH = 272;
 const byte DEFAULT_BLOCK_HEIGHT = 3;
 
-class BasePattern;
+class BasePattern {
+  public:
+    byte len;
+    const unsigned char PROGMEM* rows;
+
+    BasePattern(byte len, const unsigned char PROGMEM* rows) : len(len), rows(rows) {
+    }
+
+    inline byte get_row(byte offset) const {
+      return pgm_read_byte(rows + offset);
+    }
+};
+
+extern BasePattern patterns_level1[];
+extern BasePattern patterns_level2[];
 
 class Pattern {
     BasePattern& base;
@@ -156,8 +170,10 @@ class Level {
     char song;
     long color;
     long calibrate_color;
-    Level(int speed, char song, long color, long calibrate_color) : 
-      speed(speed), song(song), color(color), calibrate_color(calibrate_color){
+    BasePattern* patterns;
+    int patterns_size;
+    Level(int speed, char song, long color, long calibrate_color, BasePattern* patterns, int patterns_size) : 
+      speed(speed), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), patterns_size(patterns_size){
     }
 };
 
