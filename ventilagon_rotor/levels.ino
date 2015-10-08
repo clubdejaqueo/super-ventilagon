@@ -261,6 +261,20 @@ BasePattern patterns_level1[] = {
   BasePattern(sizeof(ladder), ladder),
 };
 
+BasePattern patterns_level4[] = {
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(whirpool), whirpool),
+  BasePattern(sizeof(bat), bat),
+  BasePattern(sizeof(ladder), ladder),
+// TODO: fixme
+//  BasePattern(sizeof(stair_1), stair_1),
+  BasePattern(sizeof(three_21), three_21),
+};
+
 BasePattern patterns_level2[] = {
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
@@ -268,54 +282,15 @@ BasePattern patterns_level2[] = {
   BasePattern(sizeof(solo_D), solo_D),
   BasePattern(sizeof(triple_C), triple_C),
   BasePattern(sizeof(multi_C), multi_C),
-  BasePattern(sizeof(double_whirpool), double_whirpool),
   BasePattern(sizeof(bat), bat),
   BasePattern(sizeof(three_21), three_21),
   BasePattern(sizeof(ladder), ladder),
   BasePattern(sizeof(two_spin), two_spin),
-  BasePattern(sizeof(three_spin), three_spin),
-  BasePattern(sizeof(four_spin), four_spin),
-  BasePattern(sizeof(rain), rain),
-};
-
-BasePattern patterns_level3[] = {
-  // TODO: fixme
-  BasePattern(sizeof(solo_A), solo_A),
-  BasePattern(sizeof(solo_B), solo_B),
-  BasePattern(sizeof(solo_C), solo_C),
-  BasePattern(sizeof(solo_D), solo_D),
-  BasePattern(sizeof(triple_C), triple_C),
-  BasePattern(sizeof(multi_C), multi_C),
-  BasePattern(sizeof(double_whirpool), double_whirpool),
-  BasePattern(sizeof(bat), bat),
-  BasePattern(sizeof(three_21), three_21),
-  BasePattern(sizeof(ladder), ladder),
-  BasePattern(sizeof(two_spin), two_spin),
-  BasePattern(sizeof(three_spin), three_spin),
-  BasePattern(sizeof(four_spin), four_spin),
-  BasePattern(sizeof(rain), rain),
-};
-
-BasePattern patterns_level4[] = {
-  // TODO: fixme
-  BasePattern(sizeof(solo_A), solo_A),
-  BasePattern(sizeof(solo_B), solo_B),
-  BasePattern(sizeof(solo_C), solo_C),
-  BasePattern(sizeof(solo_D), solo_D),
-  BasePattern(sizeof(triple_C), triple_C),
-  BasePattern(sizeof(multi_C), multi_C),
-  BasePattern(sizeof(double_whirpool), double_whirpool),
-  BasePattern(sizeof(bat), bat),
-  BasePattern(sizeof(three_21), three_21),
-  BasePattern(sizeof(ladder), ladder),
-  BasePattern(sizeof(two_spin), two_spin),
-  BasePattern(sizeof(three_spin), three_spin),
   BasePattern(sizeof(four_spin), four_spin),
   BasePattern(sizeof(rain), rain),
 };
 
 BasePattern patterns_level5[] = {
-  // TODO: fixme
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),
@@ -326,26 +301,32 @@ BasePattern patterns_level5[] = {
   BasePattern(sizeof(bat), bat),
   BasePattern(sizeof(three_21), three_21),
   BasePattern(sizeof(ladder), ladder),
-  BasePattern(sizeof(two_spin), two_spin),
   BasePattern(sizeof(three_spin), three_spin),
+  BasePattern(sizeof(rain), rain),
+};
+
+BasePattern patterns_level3[] = {
+  BasePattern(sizeof(solo_A), solo_A),
+  BasePattern(sizeof(solo_B), solo_B),
+  BasePattern(sizeof(solo_C), solo_C),
+  BasePattern(sizeof(solo_D), solo_D),
+  BasePattern(sizeof(triple_C), triple_C),
+  BasePattern(sizeof(double_whirpool), double_whirpool),
+  BasePattern(sizeof(three_21), three_21),
   BasePattern(sizeof(four_spin), four_spin),
   BasePattern(sizeof(rain), rain),
 };
 
 BasePattern patterns_level6[] = {
-  // TODO: fixme
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),
   BasePattern(sizeof(solo_D), solo_D),
   BasePattern(sizeof(triple_C), triple_C),
-  BasePattern(sizeof(multi_C), multi_C),
   BasePattern(sizeof(double_whirpool), double_whirpool),
-  BasePattern(sizeof(bat), bat),
+// TODO: fixme  
+//  BasePattern(sizeof(stair_2), stair_2),
   BasePattern(sizeof(three_21), three_21),
-  BasePattern(sizeof(ladder), ladder),
-  BasePattern(sizeof(two_spin), two_spin),
-  BasePattern(sizeof(three_spin), three_spin),
   BasePattern(sizeof(four_spin), four_spin),
   BasePattern(sizeof(rain), rain),
 };
