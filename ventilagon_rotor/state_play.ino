@@ -63,7 +63,7 @@ void PlayState::loop() {
   }
 
 
-  if (now > (last_step + step_delay)) {
+  if (now > (last_step + current_level.step_delay)) {
     if (!board.colision(nave_pos, ROW_SHIP)) {
       if (!paused) {
         board.step();

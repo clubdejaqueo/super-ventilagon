@@ -15,7 +15,6 @@ void handle_interrupt() {
 }
 
 unsigned long last_step = 0;
-const unsigned long step_delay = 100000L;
 
 
 void setup() {

@@ -163,14 +163,14 @@ class Ship {
 
 class Level {
   public:
-    int speed;
+    unsigned long step_delay;
     char song;
     long color;
     long calibrate_color;
     BasePattern* patterns;
     int patterns_size;
-    Level(int speed, char song, long color, long calibrate_color, BasePattern* patterns, int patterns_size) : 
-      speed(speed), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), patterns_size(patterns_size){
+    Level(int step_delay, char song, long color, long calibrate_color, BasePattern* patterns, int patterns_size) : 
+      step_delay(step_delay), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), patterns_size(patterns_size){
     }
 };
 
