@@ -36,14 +36,14 @@ Board::Board() {
 }
 
 void Board::reset() {
-  pat.randomize(0);
+  pat.randomize();
   visible.reset();
 }
 
 void Board::fill_patterns() {
   byte row_num = 20;
   while (row_num != NUM_ROWS) {
-    pat.randomize(0);
+    pat.randomize();
 
     while (!pat.finished()) {
       visible.push_back(pat.next_row());
@@ -68,7 +68,7 @@ void Board::step() {
   visible.push_back(pat.next_row());
 
   if (pat.finished()) {
-    pat.randomize(99);
+    pat.randomize();
   }
 }
 

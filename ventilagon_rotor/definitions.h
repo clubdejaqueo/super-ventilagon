@@ -22,27 +22,18 @@ const int SUBDEGREES_MASK = 8191;
 const int SHIP_WIDTH = 272;
 const byte DEFAULT_BLOCK_HEIGHT = 3;
 
-class BasePattern {
-  public:
-    byte len;
-    const unsigned char PROGMEM* rows;
-
-    BasePattern(byte len, const unsigned char PROGMEM* rows) : len(len), rows(rows) {
-    }
-};
-
 class Pattern {
-    const unsigned char PROGMEM* transformation_base;
-    inline unsigned char transform(unsigned char b);
+    const byte* transformation_base;
+    inline byte transform(byte b);
     int current_height;
     int block_height;
     int row;
-    const unsigned char PROGMEM* rows_base;
-    byte base_len;
+    const byte* rows_base;
+    byte rows_len;
   public:
     Pattern();
-    void randomize(int level);
-    inline unsigned char next_row();
+    void randomize();
+    inline byte next_row();
     inline bool finished();
 };
 
@@ -83,7 +74,7 @@ class Board {
 };
 
 class Display {
-    int last_column_drawn;
+    unsigned int last_column_drawn;
     int drift_pos;
     int drift_speed;
     bool calibrating;
@@ -162,10 +153,10 @@ class Level {
     char song;
     long color;
     long calibrate_color;
-    const BasePattern* patterns PROGMEM;
-    int patterns_size;
-    Level(unsigned long step_delay, char song, long color, long calibrate_color, const BasePattern* patterns, int patterns_size) : 
-      step_delay(step_delay), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), patterns_size(patterns_size){
+    const byte* const* patterns;
+    int num_patterns;
+    Level(unsigned long step_delay, char song, long color, long calibrate_color, const byte* const* patterns, int num_patterns) : 
+      step_delay(step_delay), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), num_patterns(num_patterns){
     }
 };
 
@@ -186,7 +177,7 @@ extern Audio audio;
 extern GameoverState gameover_state;
 extern PlayState play_state;
 extern ResettingState resetting_state;
-extern const unsigned char PROGMEM transformations[];
+extern const byte PROGMEM transformations[];
 extern Level levels[];
 extern Level& current_level;
 extern byte new_level;

@@ -3,7 +3,7 @@
 // times 6 possible rotations
 // times 2 mirrored options = 768 bytes
 
-const unsigned char PROGMEM transformations[] = {
+const byte PROGMEM transformations[] = {
   // Mirrored: no
   // Rotated: 0
   0b000000, 0b000001, 0b000010, 0b000011, 0b000100, 0b000101, 0b000110, 0b000111,
