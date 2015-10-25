@@ -1,21 +1,18 @@
 
-Pattern::Pattern() : base(choose_random()) {
+Pattern::Pattern() {
+  randomize(99);
   block_height = DEFAULT_BLOCK_HEIGHT;
   current_height = block_height;
 }
 
-BasePattern& Pattern::choose_random() {
+void Pattern::randomize(int level) {
   // init to current_height to max, so first call to next_row() calculates the value of row zero
   current_height = block_height;
   row = 0;
   transformation_base = transformations + (random(0, 12) << 6);
-  BasePattern& base = current_level.patterns[random(0, current_level.patterns_size)];
-  base_len = base.len;
-  return base;
-}
-
-void Pattern::randomize(int level) {
-  base = choose_random();
+  const BasePattern* base = &current_level.patterns[random(0, current_level.patterns_size)];
+  base_len = pgm_read_byte(&base->len);
+  rows_base = (const unsigned char*) pgm_read_ptr(&base->rows);
 }
 
 unsigned char Pattern::transform(unsigned char b) {
@@ -26,7 +23,8 @@ unsigned char Pattern::next_row() {
   static unsigned char value;
   if (current_height++ >= block_height) {
     current_height = 0;
-    value = transform(base.get_row(row++));
+    unsigned char base_value = pgm_read_byte(rows_base + row++);
+    value = transform(base_value);
   }
   return value;
 }

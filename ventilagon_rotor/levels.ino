@@ -1,7 +1,7 @@
 // Roughly based on: "Super Hexagon 101 : Know your Patterns"
 // http://steamcommunity.com/sharedfiles/filedetails/?id=121153531
 
-#define PATTERN const unsigned char PROGMEM
+#define PATTERN const byte PROGMEM
 #define END 0,0,0
 
 PATTERN solo_A[] = {
@@ -250,7 +250,7 @@ PATTERN rain[] = {
   END
 };
 
-BasePattern patterns_level1[] = {
+const BasePattern patterns_level1[] PROGMEM = {
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),
@@ -261,7 +261,7 @@ BasePattern patterns_level1[] = {
   BasePattern(sizeof(ladder), ladder),
 };
 
-BasePattern patterns_level4[] = {
+const BasePattern patterns_level4[] PROGMEM = {
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),
@@ -275,7 +275,7 @@ BasePattern patterns_level4[] = {
   BasePattern(sizeof(three_21), three_21),
 };
 
-BasePattern patterns_level2[] = {
+const BasePattern patterns_level2[] PROGMEM = {
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),
@@ -290,7 +290,7 @@ BasePattern patterns_level2[] = {
   BasePattern(sizeof(rain), rain),
 };
 
-BasePattern patterns_level5[] = {
+const BasePattern patterns_level5[] PROGMEM = {
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),
@@ -305,7 +305,7 @@ BasePattern patterns_level5[] = {
   BasePattern(sizeof(rain), rain),
 };
 
-BasePattern patterns_level3[] = {
+const BasePattern patterns_level3[] PROGMEM = {
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),
@@ -317,7 +317,7 @@ BasePattern patterns_level3[] = {
   BasePattern(sizeof(rain), rain),
 };
 
-BasePattern patterns_level6[] = {
+const BasePattern patterns_level6[] PROGMEM = {
   BasePattern(sizeof(solo_A), solo_A),
   BasePattern(sizeof(solo_B), solo_B),
   BasePattern(sizeof(solo_C), solo_C),

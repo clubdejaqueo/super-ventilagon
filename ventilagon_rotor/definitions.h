@@ -29,21 +29,16 @@ class BasePattern {
 
     BasePattern(byte len, const unsigned char PROGMEM* rows) : len(len), rows(rows) {
     }
-
-    inline byte get_row(byte offset) const {
-      return pgm_read_byte(rows + offset);
-    }
 };
 
 class Pattern {
-    BasePattern& base;
     const unsigned char PROGMEM* transformation_base;
     inline unsigned char transform(unsigned char b);
     int current_height;
     int block_height;
     int row;
-    int base_len;
-    BasePattern& choose_random();
+    const unsigned char PROGMEM* rows_base;
+    byte base_len;
   public:
     Pattern();
     void randomize(int level);
@@ -167,9 +162,9 @@ class Level {
     char song;
     long color;
     long calibrate_color;
-    BasePattern* patterns;
+    const BasePattern* patterns PROGMEM;
     int patterns_size;
-    Level(unsigned long step_delay, char song, long color, long calibrate_color, BasePattern* patterns, int patterns_size) : 
+    Level(unsigned long step_delay, char song, long color, long calibrate_color, const BasePattern* patterns, int patterns_size) : 
       step_delay(step_delay), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), patterns_size(patterns_size){
     }
 };
