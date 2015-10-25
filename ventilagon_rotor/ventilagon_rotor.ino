@@ -6,11 +6,15 @@ int nave_calibrate = -478;
 
 
 volatile unsigned long last_turn = 0;
-volatile unsigned long last_turn_duration = 100000L;
+volatile unsigned long last_turn_duration = 10L;
 
 void handle_interrupt() {
   unsigned long this_turn = micros();
-  last_turn_duration = this_turn - last_turn;
+  unsigned long this_turn_duration = this_turn - last_turn;
+  if (this_turn_duration < (last_turn_duration >> 2)) {
+    //return;
+  }
+  last_turn_duration = this_turn_duration;
   last_turn = this_turn;
 }
 
