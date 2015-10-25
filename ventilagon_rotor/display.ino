@@ -14,6 +14,9 @@ bool Display::ship_on(int current_pos) {
   if (calibrating) {
     return board.colision(current_pos, ROW_SHIP);
   }
+
+// HAY QUE ARREGLAR ACA
+
   if (abs(nave_pos - current_pos) < (SHIP_WIDTH / 2)) {
     return true;
   }
