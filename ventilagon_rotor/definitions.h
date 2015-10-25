@@ -169,7 +169,7 @@ class Level {
     long calibrate_color;
     BasePattern* patterns;
     int patterns_size;
-    Level(int step_delay, char song, long color, long calibrate_color, BasePattern* patterns, int patterns_size) : 
+    Level(unsigned long step_delay, char song, long color, long calibrate_color, BasePattern* patterns, int patterns_size) : 
       step_delay(step_delay), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), patterns_size(patterns_size){
     }
 };
