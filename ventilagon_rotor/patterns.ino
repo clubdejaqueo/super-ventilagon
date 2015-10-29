@@ -11,8 +11,7 @@ void Pattern::randomize() {
   row = 0;
   transformation_base = transformations + (random(0, 12) << 6);
 
-  const byte* pattern = current_level.patterns[random(0, current_level.num_patterns)];
-  rows_base = (const byte*) pgm_read_ptr(pattern);
+  rows_base = (const byte*) pgm_read_ptr(current_level.patterns + random(0, current_level.num_patterns));
   rows_len = pgm_read_byte(rows_base++);
 }
 
