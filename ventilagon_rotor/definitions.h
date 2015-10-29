@@ -52,10 +52,9 @@ class Ledbar {
     void setPixelColor(int pixel, long color);
 
   public:
-    boolean alt_row;
     void init();
     void clear();
-    void draw(byte num_row, boolean value);
+    void draw(byte num_row, boolean value, boolean alt_column);
     inline void update();
 };
 
@@ -152,11 +151,11 @@ class Level {
     unsigned long step_delay;
     char song;
     long color;
-    long calibrate_color;
+    long bg1, bg2;
     const byte* const* patterns;
     int num_patterns;
-    Level(unsigned long step_delay, char song, long color, long calibrate_color, const byte* const* patterns, int num_patterns) : 
-      step_delay(step_delay), song(song), color(color), calibrate_color(calibrate_color), patterns(patterns), num_patterns(num_patterns){
+    Level(unsigned long step_delay, char song, long color, long bg1, long bg2, const byte* const* patterns, int num_patterns) : 
+      step_delay(step_delay), song(song), color(color), bg1(bg1), bg2(bg2), patterns(patterns), num_patterns(num_patterns){
     }
 };
 

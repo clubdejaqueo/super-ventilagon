@@ -22,14 +22,18 @@ void Ledbar::clear() {
   Tlc.clear();
 }
 
-const long BLACK = 0x000000;
+const long RED = 0xff0000;
 
-void Ledbar::draw(byte num_row, boolean value) {
+void Ledbar::draw(byte num_row, boolean value, boolean alt_column) {
   long color;
-  if (num_row == ROW_SHIP) {
-    color = value ? current_level.calibrate_color : BLACK;
+  if (num_row == ROW_SHIP && value) {
+    color = RED;
   } else {
-    color = value ? current_level.color : BLACK;
+    if (value) {
+      color = current_level.color;
+    } else { 
+      color = alt_column ? current_level.bg1 : current_level.bg2;
+    }
   }
   setPixelColor(num_row, color);
 //  debug("row: ");

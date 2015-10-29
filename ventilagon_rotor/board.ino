@@ -79,11 +79,10 @@ void Board::step_back() {
 void Board::draw_column(byte column, Ledbar& ledbar) {
   byte mask = 1 << column;
   ledbar.clear();
-  ledbar.alt_row = (column % 2);
   for (byte n = 0; n < NUM_ROWS; n++) {
     byte row = visible.get_row(n);
     boolean value = row & mask;
-    ledbar.draw(n, value);
+    ledbar.draw(n, value, column & 1);
   }
   ledbar.update();
 }
