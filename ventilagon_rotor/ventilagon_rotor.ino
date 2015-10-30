@@ -11,9 +11,9 @@ volatile unsigned long last_turn_duration = 10L;
 void handle_interrupt() {
   unsigned long this_turn = micros();
   unsigned long this_turn_duration = this_turn - last_turn;
-  if (this_turn_duration < (last_turn_duration >> 2)) {
-    //return;
-  }
+  //if (this_turn_duration < (last_turn_duration >> 2)) {
+  //  return;
+  //}
   last_turn_duration = this_turn_duration;
   last_turn = this_turn;
 }
