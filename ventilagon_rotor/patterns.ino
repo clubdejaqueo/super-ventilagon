@@ -1,7 +1,7 @@
 
 Pattern::Pattern() {
   randomize();
-  block_height = DEFAULT_BLOCK_HEIGHT;
+  block_height = current_level.block_height;
   current_height = block_height;
 }
 

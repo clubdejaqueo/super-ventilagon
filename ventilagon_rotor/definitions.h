@@ -20,7 +20,6 @@ const byte ROW_COLISION = 7;
 const int SUBDEGREES = 8192;
 const int SUBDEGREES_MASK = 8191;
 const int SHIP_WIDTH = 272;
-const byte DEFAULT_BLOCK_HEIGHT = 3;
 
 class Pattern {
     const byte* transformation_base;
@@ -154,8 +153,9 @@ class Level {
     long bg1, bg2;
     const byte* const* patterns;
     int num_patterns;
-    Level(unsigned long step_delay, char song, long color, long bg1, long bg2, const byte* const* patterns, int num_patterns) : 
-      step_delay(step_delay), song(song), color(color), bg1(bg1), bg2(bg2), patterns(patterns), num_patterns(num_patterns){
+    byte block_height;
+    Level(unsigned long step_delay, byte block_height, char song, long color, long bg1, long bg2, const byte* const* patterns, int num_patterns) : 
+      step_delay(step_delay), block_height(block_height), song(song), color(color), bg1(bg1), bg2(bg2), patterns(patterns), num_patterns(num_patterns){
     }
 };
 
