@@ -79,7 +79,11 @@ void Board::step_back() {
 void Board::draw_column(byte column, Ledbar& ledbar) {
   byte mask = 1 << column;
   ledbar.clear();
-  for (byte n = 0; n < NUM_ROWS; n++) {
+  
+  // always paint the innermost circle
+  ledbar.draw(0, true, true);
+  
+  for (byte n = 1; n < NUM_ROWS; n++) {
     byte row = visible.get_row(n);
     boolean value = row & mask;
     ledbar.draw(n, value, column & 1);
