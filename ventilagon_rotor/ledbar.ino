@@ -1,3 +1,10 @@
+// The following two changes are needed in Tlc5940/tlc_config.h
+// to enable grayscales:
+//
+//#define TLC_PWM_PERIOD    2048
+//#define TLC_GSCLK_PERIOD    1
+//
+
 #include <Tlc5940.h>
 
 Ledbar ledbar;
