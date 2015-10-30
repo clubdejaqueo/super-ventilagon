@@ -47,7 +47,7 @@ void PlayState::loop() {
   unsigned long now = micros();
 
   if (boton_cw != boton_ccw) {
-    int new_pos;
+    int new_pos = 0;
 
     if (boton_cw) {
       new_pos = nave_pos + rotation_speed;
