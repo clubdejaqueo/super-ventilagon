@@ -311,20 +311,25 @@ levels = [
 
 END = [0,0,0]
 
+for _, values in patterns:
+    values += END
+
+sizeof_patterns = sum(len(x) for (name, x) in patterns)
+sizeof_levels = sum(len(x) for x in levels) * 2
+print "// patterns %d bytes, patterns_levels %d bytes" % (sizeof_patterns, sizeof_levels)
+print
+
 for name, values in patterns:
     print "PATTERN %s[] = {" % name
-    values += END
     print "  %d," % len(values)
     for v in values:
         print "  0b{:06b},".format(v)
     print "};"
     print
 
-print
-
-for n, patterns in enumerate(levels):
+for n, level_patterns in enumerate(levels):
     print "const byte * const patterns_level%d[] PROGMEM = {" % (n+1)
-    for p in patterns:
+    for p in level_patterns:
         print "  %s," % p
     print "};"
     print

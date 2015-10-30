@@ -1,6 +1,8 @@
 // Roughly based on: "Super Hexagon 101 : Know your Patterns"
 // http://steamcommunity.com/sharedfiles/filedetails/?id=121153531
 
+// patterns 231 bytes, patterns_levels 118 bytes
+
 #define PATTERN const byte PROGMEM
 PATTERN solo_A[] = {
   10,
