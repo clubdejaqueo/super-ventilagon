@@ -161,6 +161,7 @@ class Level {
 
 class Audio {
   public:
+    void inline play_superventilagon();
     void inline play_crash();
     void inline play_game_over();
     void inline begin();

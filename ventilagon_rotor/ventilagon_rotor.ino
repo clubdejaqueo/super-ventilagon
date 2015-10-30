@@ -22,17 +22,21 @@ unsigned long last_step = 0;
 
 
 void setup() {
+  pinMode(HALL_SENSOR, INPUT_PULLUP);
+  attachInterrupt(0, handle_interrupt, FALLING);
   Serial.begin(57600);
 
   randomSeed(analogRead(0));
   //randomSeed(83);
 
-  pinMode(HALL_SENSOR, INPUT_PULLUP);
   ledbar.init();
   ship.init();
   board.fill_patterns();
+  new_level = 0;
+  
+  audio.stop_song();
+  audio.play_superventilagon();
   State::change_state(&play_state);
-  attachInterrupt(0, handle_interrupt, FALLING);
 }
 
 bool boton_cw = false;

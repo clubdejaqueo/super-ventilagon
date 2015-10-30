@@ -19,6 +19,10 @@ p) wonderful.wav
 
 Audio audio;
 
+void Audio::play_superventilagon() {
+  Serial.print("n");
+}
+
 void Audio::play_crash() {
   Serial.print("c");
 }

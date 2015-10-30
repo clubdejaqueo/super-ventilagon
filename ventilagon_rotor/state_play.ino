@@ -18,6 +18,7 @@ char section_sounds[] = {
 };
 
 void PlayState::setup() {
+  current_level = levels[new_level];
   paused = false;
   board.reset();
   audio.begin();

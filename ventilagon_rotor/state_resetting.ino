@@ -22,7 +22,6 @@ void ResettingState::loop() {
 
   // despues de medio segundo, arrancar el juego
   if (counter > NUM_ROWS) {
-    current_level = levels[new_level];
     State::change_state(&play_state);
   }
 }
