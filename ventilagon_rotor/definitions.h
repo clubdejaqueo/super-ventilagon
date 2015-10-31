@@ -68,7 +68,7 @@ class Board {
     boolean colision(int pos, byte num_row);
     void step();
     void step_back();
-    void draw_column(byte column, Ledbar& ledbar);
+    void draw_column(byte column);
 };
 
 class Display {

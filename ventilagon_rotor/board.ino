@@ -76,7 +76,7 @@ void Board::step_back() {
   visible.push_front(0);
 }
 
-void Board::draw_column(byte column, Ledbar& ledbar) {
+void Board::draw_column(byte column) {
   byte mask = 1 << column;
   ledbar.clear();
   
