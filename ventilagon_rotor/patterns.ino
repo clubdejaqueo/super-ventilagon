@@ -7,7 +7,7 @@ Pattern::Pattern() {
 
 void Pattern::randomize() {
   // init current_height to max, so first call to next_row() calculates the value of row zero
-  current_height = block_height;
+  current_height = block_height = current_level.block_height;
   row = 0;
   transformation_base = transformations + (random(0, 12) << 6);
   int new_pattern = random(0, current_level.num_patterns);
