@@ -29,6 +29,7 @@ bool Display::ship_on(int current_pos) {
 }
 
 void Display::tick(unsigned long now) {
+  // esto no hace falta calcularlo tan seguido. Una vez por vuelta deberia alcanzar
   drift_pos = (drift_pos + drift_speed) & SUBDEGREES_MASK;
 
   unsigned long pos_width = min(last_turn_duration / SUBDEGREES, 100000L);
