@@ -1,5 +1,5 @@
 // The following two changes are needed in Tlc5940/tlc_config.h
-// to enable grayscales:
+// to enable the grayscales we need:
 //
 //#define TLC_PWM_PERIOD    2048
 //#define TLC_GSCLK_PERIOD    1
@@ -39,7 +39,7 @@ void Ledbar::draw(byte num_row, boolean value, boolean alt_column) {
     color = alt_column ? current_level.bg1 : current_level.bg2;
   }
   if (num_row == ROW_SHIP && value) {
-    color = RED;
+    //color = RED;
   }
   setPixelColor(num_row, color);
 }

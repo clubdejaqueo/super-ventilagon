@@ -1,9 +1,7 @@
 #include "definitions.h"
 
-
 int nave_pos = 360;
 int nave_calibrate = -478;
-
 
 volatile unsigned long last_turn = 0;
 volatile unsigned long last_turn_duration = 10L;
@@ -19,7 +17,6 @@ void handle_interrupt() {
 }
 
 unsigned long last_step = 0;
-
 
 void setup() {
   pinMode(HALL_SENSOR, INPUT_PULLUP);
@@ -43,7 +40,6 @@ bool boton_cw = false;
 bool boton_ccw = false;
 
 char inChar = 0;
-
 
 void serialEvent() {
   while (Serial.available()) {
