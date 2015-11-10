@@ -32,12 +32,9 @@ void Display::tick(unsigned long now) {
   // esto no hace falta calcularlo tan seguido. Una vez por vuelta deberia alcanzar
   drift_pos = (drift_pos + drift_speed) & SUBDEGREES_MASK;
 
-  unsigned long pos_width = min(last_turn_duration / SUBDEGREES, 100000L);
-  unsigned long column_width = min(last_turn_duration / NUM_COLUMNS, 100000L);
-
-  unsigned long drift = pos_width * drift_pos;
-  unsigned int current_pos = ((drift + now - last_turn) / pos_width) & SUBDEGREES_MASK;
-  unsigned int current_column = ((drift + now - last_turn) / column_width) % NUM_COLUMNS;
+  unsigned long drift = drift_pos * last_turn_duration / SUBDEGREES;
+  unsigned int current_pos = ((drift + now - last_turn) * SUBDEGREES / last_turn_duration) & SUBDEGREES_MASK;
+  unsigned int current_column = ((drift + now - last_turn) * NUM_COLUMNS / last_turn_duration) % NUM_COLUMNS;
 
   if (ship_on(current_pos)) {
     ship.prender();
