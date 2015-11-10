@@ -87,6 +87,12 @@ while 1:
                 n = event.key - pygame.K_a
                 char = chr(ord("a") + n)
                 received(char)
+            if event.key == pygame.K_MINUS:
+                send("-")
+            if event.key == pygame.K_EQUALS:
+                send("=")
+            if event.key == pygame.K_x:
+                send("x")
             if event.key == pygame.K_SPACE:
                 send(" ")
             if event.key in (pygame.K_LEFT, pygame.K_9):

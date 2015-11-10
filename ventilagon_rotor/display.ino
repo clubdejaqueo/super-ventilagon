@@ -1,3 +1,20 @@
+int nave_pos = 360;
+//int nave_calibrate = -478; // ventilador velocidad media
+int nave_calibrate = -250; // ventilador velocidad maxima
+
+volatile unsigned long last_turn = 0;
+volatile unsigned long last_turn_duration = 10L;
+
+void handle_interrupt() {
+  unsigned long this_turn = micros();
+  unsigned long this_turn_duration = this_turn - last_turn;
+  //if (this_turn_duration < (last_turn_duration >> 2)) {
+  //  return;
+  //}
+  last_turn_duration = this_turn_duration;
+  last_turn = this_turn;
+}
+
 Display display;
 
 void Display::adjust_drift() {
@@ -15,14 +32,14 @@ bool Display::ship_on(int current_pos) {
     return board.colision(current_pos, ROW_SHIP);
   }
 
-// NO HAY QUE ARREGLAR NADA ACA
+  // NO HAY QUE ARREGLAR NADA ACA
 
   if (abs(nave_pos - current_pos) < (SHIP_WIDTH / 2)) {
     return true;
   }
-  if (abs( ((nave_pos + SUBDEGREES / 2) & SUBDEGREES_MASK) - 
+  if (abs( ((nave_pos + SUBDEGREES / 2) & SUBDEGREES_MASK) -
            ((current_pos + SUBDEGREES / 2) & SUBDEGREES_MASK))
-         < (SHIP_WIDTH / 2)) {
+      < (SHIP_WIDTH / 2)) {
     return true;
   }
   return false;
@@ -51,3 +68,7 @@ void Display::calibrate(bool calibrating) {
   this->calibrating = calibrating;
 }
 
+void Display::dump_debug() {
+  Serial.print("VELOCIDAD:");
+  Serial.println(last_turn_duration);
+}

@@ -1,21 +1,5 @@
 #include "definitions.h"
 
-int nave_pos = 360;
-int nave_calibrate = -478;
-
-volatile unsigned long last_turn = 0;
-volatile unsigned long last_turn_duration = 10L;
-
-void handle_interrupt() {
-  unsigned long this_turn = micros();
-  unsigned long this_turn_duration = this_turn - last_turn;
-  //if (this_turn_duration < (last_turn_duration >> 2)) {
-  //  return;
-  //}
-  last_turn_duration = this_turn_duration;
-  last_turn = this_turn;
-}
-
 unsigned long last_step = 0;
 
 void setup() {
@@ -61,6 +45,15 @@ void serialEvent() {
       case ' ':
         play_state.toggle_pause();
         break;
+      case '-':
+        finetune_minus();
+        break;
+      case '=':
+        finetune_plus();
+        break;
+      case 'x':
+        finetune_next();
+        break;
     }
 
     if (inChar != 0) {
@@ -68,8 +61,7 @@ void serialEvent() {
         selectLevel(inChar - '1');
       }
       if (inChar == ' ') {
-        Serial.print("VELOCIDAD:");
-        Serial.println(last_turn_duration);
+        display.dump_debug();
       }
       if (inChar == 'n') {
         board.fill_patterns();

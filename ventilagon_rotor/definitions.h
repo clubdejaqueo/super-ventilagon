@@ -79,6 +79,7 @@ class Display {
   public:
     Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0), calibrating(false) {
     }
+    void dump_debug();
     void adjust_drift();
     void tick(unsigned long now);
     void calibrate(bool calibrating);
@@ -181,5 +182,6 @@ extern const byte PROGMEM transformations[];
 extern Level levels[];
 extern Level& current_level;
 extern byte new_level;
+extern int nave_calibrate;
 
 #define elements_in(arrayname) (sizeof arrayname/sizeof *arrayname)
