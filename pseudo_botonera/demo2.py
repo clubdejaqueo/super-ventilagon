@@ -50,7 +50,6 @@ def received(char):
         pygame.mixer.music.stop()
 
     if "1" <= char <= "3":
-        print "loading music", char
         pygame.mixer.music.load("music/ventilagon%s.wav" % char)
         pygame.mixer.music.play(-1)
 
@@ -71,7 +70,8 @@ while 1:
     """
     while wixel.inWaiting():
         c = wixel.read()
-        print c,
+        sys.stdout.write( '%s' % c )
+        sys.stdout.flush()
         received(c)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -81,7 +81,6 @@ while 1:
                 level = event.key - pygame.K_1 + 1
                 char = chr(ord("0") + level)
                 send(char)
-                print "\nSelecting level", char
 #                received(char)
             if pygame.K_a <= event.key < (pygame.K_a + len(sounds)):
                 n = event.key - pygame.K_a
