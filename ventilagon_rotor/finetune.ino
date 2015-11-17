@@ -8,6 +8,7 @@ struct TunableItem {
 
 TunableItem ti[] = {
   DEF_ITEM(nave_calibrate),
+  DEF_ITEM(half_ship_width),
 };
 
 const int num_tunableitems = elements_in(ti);
@@ -28,8 +29,8 @@ void finetune_next() {
     if (n == selected_tunable) {
       debug(">>> ");
     }
-    debug(ti[selected_tunable].name);
+    debug(ti[n].name);
     debug(": ");
-    debugln(ti[selected_tunable].value);
+    debugln(ti[n].value);
   }
 }

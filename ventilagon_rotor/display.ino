@@ -1,6 +1,7 @@
 int nave_pos = 360;
 //int nave_calibrate = -478; // ventilador velocidad media
 int nave_calibrate = -250; // ventilador velocidad maxima
+int half_ship_width = 50;
 
 volatile unsigned long last_turn = 0;
 volatile unsigned long last_turn_duration = 10L;
@@ -34,12 +35,12 @@ bool Display::ship_on(int current_pos) {
 
   // NO HAY QUE ARREGLAR NADA ACA
 
-  if (abs(nave_pos - current_pos) < (SHIP_WIDTH / 2)) {
+  if (abs(nave_pos - current_pos) < (half_ship_width)) {
     return true;
   }
   if (abs( ((nave_pos + SUBDEGREES / 2) & SUBDEGREES_MASK) -
            ((current_pos + SUBDEGREES / 2) & SUBDEGREES_MASK))
-      < (SHIP_WIDTH / 2)) {
+      < (half_ship_width)) {
     return true;
   }
   return false;
