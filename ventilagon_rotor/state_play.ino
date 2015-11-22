@@ -40,6 +40,7 @@ void PlayState::advance_section(unsigned long now) {
   section_init_time = now;
   section_duration = section_durations[section];
   audio.play_song(section_sounds[section]);
+  current_level = levels[section];
 }
 
 
