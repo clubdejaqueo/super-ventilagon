@@ -374,12 +374,12 @@ const byte * const patterns_level6[] PROGMEM = {
 };
 
 Level levels[] = {
-  Level(100000L, 4, '1', 0x0000ff, 0x000000, 0x000001, patterns_level1, elements_in(patterns_level1)),
-  Level(90000L, 4, '2', 0x00ff00, 0x000000, 0x000100, patterns_level2, elements_in(patterns_level2)),
-  Level(80000L, 3, '3', 0xffff00, 0x000000, 0x010100, patterns_level3, elements_in(patterns_level3)),
-  Level(70000L, 3, '1', 0x00ffff, 0x000000, 0x000101, patterns_level4, elements_in(patterns_level4)),
-  Level(60000L, 2, '2', 0xff00ff, 0x000000, 0x010001, patterns_level5, elements_in(patterns_level5)),
-  Level(50000L, 2, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, elements_in(patterns_level6)),
+  Level(40000L, 4, 5, '1', 0x0000ff, 0x000000, 0x000001, patterns_level1, elements_in(patterns_level1)),
+  Level(39000L, 4, 6, '2', 0x00ff00, 0x000000, 0x000100, patterns_level2, elements_in(patterns_level2)),
+  Level(30000L, 4, 7, '3', 0xffff00, 0x000000, 0x010100, patterns_level3, elements_in(patterns_level3)),
+  Level(40000L, 4, 8, '1', 0x00ffff, 0x000000, 0x000101, patterns_level4, elements_in(patterns_level4)),
+  Level(40000L, 4, 9, '2', 0xff00ff, 0x000000, 0x010001, patterns_level5, elements_in(patterns_level5)),
+  Level(35000L, 4, 10, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, elements_in(patterns_level6)),
 };
 
 Level& current_level = levels[3];

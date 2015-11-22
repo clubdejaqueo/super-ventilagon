@@ -154,8 +154,10 @@ class Level {
     const byte* const* patterns;
     int num_patterns;
     byte block_height;
-    Level(unsigned long step_delay, byte block_height, char song, long color, long bg1, long bg2, const byte* const* patterns, int num_patterns) : 
-      step_delay(step_delay), block_height(block_height), song(song), color(color), bg1(bg1), bg2(bg2), patterns(patterns), num_patterns(num_patterns){
+    byte rotation_speed = 5;
+
+    Level(unsigned long step_delay, byte block_height, byte rotation_speed, char song, long color, long bg1, long bg2, const byte* const* patterns, int num_patterns) : 
+      step_delay(step_delay), block_height(block_height), rotation_speed(rotation_speed), song(song), color(color), bg1(bg1), bg2(bg2), patterns(patterns), num_patterns(num_patterns){
     }
 };
 

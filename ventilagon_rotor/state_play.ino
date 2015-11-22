@@ -42,7 +42,6 @@ void PlayState::advance_section(unsigned long now) {
   audio.play_song(section_sounds[section]);
 }
 
-const byte rotation_speed = 5;
 
 void PlayState::loop() {
   unsigned long now = micros();
@@ -51,10 +50,10 @@ void PlayState::loop() {
     int new_pos = 0;
 
     if (boton_cw) {
-      new_pos = nave_pos + rotation_speed;
+      new_pos = nave_pos + current_level.rotation_speed;
     }
     if (boton_ccw) {
-      new_pos = nave_pos - rotation_speed;
+      new_pos = nave_pos - current_level.rotation_speed;
     }
 
     new_pos = (new_pos + SUBDEGREES) & SUBDEGREES_MASK;
