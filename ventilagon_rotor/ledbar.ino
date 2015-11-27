@@ -34,9 +34,9 @@ const long RED = 0xff0000;
 void Ledbar::draw(byte num_row, boolean value, boolean alt_column) {
   long color;
   if (value) {
-    color = current_level.color;
+    color = current_level->color;
   } else { 
-    color = alt_column ? current_level.bg1 : current_level.bg2;
+    color = alt_column ? current_level->bg1 : current_level->bg2;
   }
   if (num_row == ROW_SHIP && value) {
     //color = RED;

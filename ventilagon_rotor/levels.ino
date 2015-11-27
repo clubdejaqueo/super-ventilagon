@@ -439,5 +439,5 @@ Level levels[] = {
   Level(40000L, 4, 7, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, elements_in(patterns_level6), &crazy_drift),
 };
 
-Level& current_level = levels[3];
+Level* current_level = &levels[0];
 byte new_level = 0;

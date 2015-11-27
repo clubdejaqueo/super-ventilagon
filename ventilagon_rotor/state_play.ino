@@ -18,13 +18,13 @@ char section_sounds[] = {
 };
 
 void PlayState::setup() {
-  current_level = levels[new_level];
+  current_level = &levels[new_level];
   paused = false;
   board.reset();
   audio.begin();
   display.reset();
   display.calibrate(false);
-  audio.play_song(current_level.song);
+  audio.play_song(current_level->song);
   section = 0;
   section_init_time = micros();
   section_duration = section_durations[section];
@@ -41,7 +41,7 @@ void PlayState::advance_section(unsigned long now) {
   section_init_time = now;
   section_duration = section_durations[section];
   audio.play_song(section_sounds[section]);
-  current_level = levels[section];
+  current_level = &levels[section];
 }
 
 
@@ -52,10 +52,10 @@ void PlayState::loop() {
     int new_pos = 0;
 
     if (boton_cw) {
-      new_pos = nave_pos + current_level.rotation_speed;
+      new_pos = nave_pos + current_level->rotation_speed;
     }
     if (boton_ccw) {
-      new_pos = nave_pos - current_level.rotation_speed;
+      new_pos = nave_pos - current_level->rotation_speed;
     }
 
     new_pos = (new_pos + SUBDEGREES) & SUBDEGREES_MASK;
@@ -67,7 +67,7 @@ void PlayState::loop() {
   }
 
 
-  if (now > (last_step + current_level.step_delay)) {
+  if (now > (last_step + current_level->step_delay)) {
     if (!board.colision(nave_pos, ROW_SHIP)) {
       if (!paused) {
         board.step();

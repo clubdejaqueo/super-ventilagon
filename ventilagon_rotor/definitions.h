@@ -190,7 +190,7 @@ extern PlayState play_state;
 extern ResettingState resetting_state;
 extern const byte PROGMEM transformations[];
 extern Level levels[];
-extern Level& current_level;
+extern Level* current_level;
 extern byte new_level;
 extern int nave_calibrate;
 

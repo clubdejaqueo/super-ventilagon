@@ -27,7 +27,7 @@ void Display::adjust_drift() {
   static int n = 0;
   n = (n+1) & 0xF;
   if (n == 0) {
-    drift_speed = current_level.new_drift(drift_speed);
+    drift_speed = current_level->new_drift(drift_speed);
   }
 }
 
