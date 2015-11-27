@@ -18,13 +18,16 @@ void handle_interrupt() {
 
 Display display;
 
+void Display::reset() {
+  drift_pos = 0;
+  drift_speed = 0;
+}
+
 void Display::adjust_drift() {
-  int drift_random = random(0, 6000);
-  if (drift_random < 7) {
-    drift_speed = drift_random - 3;
-    if (drift_speed == 0) {
-      drift_speed = 4;
-    }
+  static int n = 0;
+  n = (n+1) & 0xF;
+  if (n == 0) {
+    drift_speed = current_level->new_drift(drift_speed);
   }
 }
 

@@ -78,6 +78,7 @@ class Display {
   public:
     Display() : last_column_drawn(-1), drift_pos(0), drift_speed(0), calibrating(false) {
     }
+    void reset();
     void dump_debug();
     void adjust_drift();
     void tick(unsigned long now);
@@ -145,6 +146,11 @@ class Ship {
     void apagar();
 };
 
+class DriftCalculator {
+  public:
+    virtual int get_new_drift(int current_drift) = 0;
+};
+
 class Level {
   public:
     unsigned long step_delay;
@@ -154,9 +160,13 @@ class Level {
     const byte* const* patterns;
     int num_patterns;
     byte block_height;
-    Level(unsigned long step_delay, byte block_height, char song, long color, long bg1, long bg2, const byte* const* patterns, int num_patterns) : 
-      step_delay(step_delay), block_height(block_height), song(song), color(color), bg1(bg1), bg2(bg2), patterns(patterns), num_patterns(num_patterns){
+    byte rotation_speed = 5;
+    DriftCalculator* drift_calculator;
+
+    Level(unsigned long step_delay, byte block_height, byte rotation_speed, char song, long color, long bg1, long bg2, const byte* const* patterns, int num_patterns, DriftCalculator* drift_calculator) : 
+      step_delay(step_delay), block_height(block_height), rotation_speed(rotation_speed), song(song), color(color), bg1(bg1), bg2(bg2), patterns(patterns), num_patterns(num_patterns), drift_calculator(drift_calculator){
     }
+    int new_drift(int current_drift);
 };
 
 class Audio {
@@ -166,6 +176,7 @@ class Audio {
     void inline play_game_over();
     void inline begin();
     void inline stop_song();
+    void inline reset();
     void inline play_song(char song);
 };
 
@@ -179,7 +190,7 @@ extern PlayState play_state;
 extern ResettingState resetting_state;
 extern const byte PROGMEM transformations[];
 extern Level levels[];
-extern Level& current_level;
+extern Level* current_level;
 extern byte new_level;
 extern int nave_calibrate;
 

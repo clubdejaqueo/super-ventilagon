@@ -42,3 +42,7 @@ void Audio::begin() {
 void Audio::play_song(char song) {
   Serial.print(song);
 }
+
+void Audio::reset() {
+  Serial.print("R");
+}
