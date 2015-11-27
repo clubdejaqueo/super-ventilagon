@@ -40,6 +40,7 @@ uint8_t _ledMask = (1 << PINB5);
 
 int section = 0;
 bool timer_running;
+bool botones_prendidos;
 unsigned long section_init_time;
 unsigned long section_duration = section_durations[section];
 
@@ -57,13 +58,11 @@ void update_servo_value(long value, long max_val) {
 }
 
 void apagar_botones() {
-  digitalWrite(LUZ_BOTON_1, LOW);
-  digitalWrite(LUZ_BOTON_2, LOW);
+  botones_prendidos = false;
 }
 
 void prender_botones() {
-  digitalWrite(LUZ_BOTON_1, HIGH);
-  digitalWrite(LUZ_BOTON_2, HIGH);
+  botones_prendidos = true;
 }
 
 void start_timer() {
@@ -141,6 +140,7 @@ void setup() {
   pinMode(LUZ_BOTON_1, OUTPUT);
   pinMode(LUZ_BOTON_2, OUTPUT);
   reset_it_all();
+  apagar_botones();
 }
 
 void check_encoder() {
@@ -168,7 +168,19 @@ void check_encoder() {
   }
 }
 
+void blink_botones() {
+  if (botones_prendidos) {
+    bool blink = (millis() >> 8) & 1;
+    digitalWrite(LUZ_BOTON_1, blink);
+    digitalWrite(LUZ_BOTON_2, blink);
+  } else {
+    digitalWrite(LUZ_BOTON_1, LOW);
+    digitalWrite(LUZ_BOTON_2, LOW);
+  }
+};
+
 void loop() {
   check_timer();
+  blink_botones();
   //check_encoder();
 }
