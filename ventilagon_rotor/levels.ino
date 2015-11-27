@@ -383,6 +383,7 @@ class NoDrift : public DriftCalculator {
 class SlowDrift : public DriftCalculator {
   public:
     int get_new_drift(int drift_speed) {
+      int drift_random = random(0, 375);
       if (drift_random < 2) {
         if (drift_speed == 0) {
           drift_speed = -1;
@@ -395,6 +396,7 @@ class SlowDrift : public DriftCalculator {
 class MedDrift : public DriftCalculator {
   public:
     int get_new_drift(int drift_speed) {
+      int drift_random = random(0, 375);
       if (drift_random < 7) {
         drift_speed = drift_random - 3;
         if (drift_speed == 0) {
@@ -408,6 +410,7 @@ class MedDrift : public DriftCalculator {
 class CrazyDrift : public DriftCalculator {
   public:
     int get_new_drift(int drift_speed) {
+      int drift_random = random(0, 375);
       if (drift_random < 11) {
         drift_speed = drift_random - 5;
         if (drift_speed == 0) {
