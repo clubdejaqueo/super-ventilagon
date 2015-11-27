@@ -6,7 +6,7 @@ const unsigned long reset_step_delay = (10L * 100 * 1000) / NUM_ROWS;
 void ResettingState::setup() {
   last_step = micros();
   counter = 0;
-  audio.stop_song();
+  audio.reset();
 }
 
 void ResettingState::loop() {
