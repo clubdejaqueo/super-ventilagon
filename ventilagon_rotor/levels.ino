@@ -373,13 +373,67 @@ const byte * const patterns_level6[] PROGMEM = {
   rain,
 };
 
+class NoDrift : public DriftCalculator {
+  public:
+    int get_new_drift(int drift_speed) {
+      return 0;
+    };
+};
+
+class SlowDrift : public DriftCalculator {
+  public:
+    int get_new_drift(int drift_speed) {
+      if (drift_random < 2) {
+        if (drift_speed == 0) {
+          drift_speed = -1;
+        }
+      }
+      return drift_speed;
+    }
+};
+
+class MedDrift : public DriftCalculator {
+  public:
+    int get_new_drift(int drift_speed) {
+      if (drift_random < 7) {
+        drift_speed = drift_random - 3;
+        if (drift_speed == 0) {
+          drift_speed = 4;
+        }
+      }
+      return drift_speed;
+    }
+};
+
+class CrazyDrift : public DriftCalculator {
+  public:
+    int get_new_drift(int drift_speed) {
+      if (drift_random < 11) {
+        drift_speed = drift_random - 5;
+        if (drift_speed == 0) {
+          drift_speed = 6;
+        }
+      }
+      return drift_speed;
+    }
+};
+
+NoDrift no_drift;
+SlowDrift slow_drift;
+MedDrift med_drift;
+CrazyDrift crazy_drift;
+
+int Level::new_drift(int current_drift) {
+  return drift_calculator->get_new_drift(current_drift);
+}
+
 Level levels[] = {
-  Level(40000L, 4, 5, '1', 0x0000ff, 0x000000, 0x000001, patterns_level1, elements_in(patterns_level1)),
-  Level(39000L, 4, 6, '2', 0x00ff00, 0x000000, 0x000100, patterns_level2, elements_in(patterns_level2)),
-  Level(30000L, 4, 7, '3', 0xffff00, 0x000000, 0x010100, patterns_level3, elements_in(patterns_level3)),
-  Level(40000L, 4, 8, '1', 0x00ffff, 0x000000, 0x000101, patterns_level4, elements_in(patterns_level4)),
-  Level(40000L, 4, 9, '2', 0xff00ff, 0x000000, 0x010001, patterns_level5, elements_in(patterns_level5)),
-  Level(35000L, 4, 10, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, elements_in(patterns_level6)),
+  Level(50000L, 4, 5, '1', 0x0000ff, 0x000000, 0x000001, patterns_level1, elements_in(patterns_level1), &no_drift),
+  Level(45000L, 4, 6, '2', 0x00ff00, 0x000000, 0x000100, patterns_level2, elements_in(patterns_level2), &slow_drift),
+  Level(40000L, 4, 7, '3', 0xffff00, 0x000000, 0x010100, patterns_level3, elements_in(patterns_level3), &med_drift),
+  Level(40000L, 4, 7, '1', 0x00ffff, 0x000000, 0x000101, patterns_level4, elements_in(patterns_level4), &med_drift),
+  Level(40000L, 4, 7, '2', 0xff00ff, 0x000000, 0x010001, patterns_level5, elements_in(patterns_level5), &crazy_drift),
+  Level(40000L, 4, 7, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, elements_in(patterns_level6), &crazy_drift),
 };
 
 Level& current_level = levels[3];

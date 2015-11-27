@@ -22,6 +22,7 @@ void PlayState::setup() {
   paused = false;
   board.reset();
   audio.begin();
+  display.reset();
   display.calibrate(false);
   audio.play_song(current_level.song);
   section = 0;
