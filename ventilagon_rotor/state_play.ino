@@ -44,7 +44,8 @@ void PlayState::advance_section(unsigned long now) {
   audio.play_song(section_sounds[section]);
   if (levels[section] == NULL) {
     // ganaste
-    State::change_state(&win_state);
+    audio.play_win();
+    State::change_state(&state_credits);
     return;
   }
   current_level = levels[section];

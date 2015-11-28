@@ -3,13 +3,12 @@ WinState win_state;
 const long win_step_delay = 25;
 unsigned long win_last_step = 0;
 unsigned long win_started;
-const long win_delay_1 = 13250; // 13.25 seconds
-const long win_delay_2 = 13250 + win_step_delay * NUM_ROWS * 2; // un poquin mas de 13.25 seconds
+const long win_delay_1 = 45000; // 45 seconds
+const long win_delay_2 = win_delay_1 + win_step_delay * NUM_ROWS * 2; // un poquin mas para que se vaya todo
 
 void WinState::setup() {
   display.calibrate(true);
-  audio.play_win();
-  board.win_reset();
+  board.reset();
   ledbar.set_win_state();
   win_started = millis();
 }
@@ -26,7 +25,7 @@ void WinState::loop() {
   }
 
   if ((now_ms - win_started) > win_delay_2) {
-    State::change_state(&state_credits);
+    State::change_state(&gameover_state);
   }
   unsigned long now = micros();
   display.tick(now);

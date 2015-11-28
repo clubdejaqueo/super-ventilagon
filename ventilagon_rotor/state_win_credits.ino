@@ -1,6 +1,6 @@
 #include <Tlc5940.h>
 CreditsState state_credits;
-const long credits_delay = 13250; // 13.25 seconds
+const long credits_delay = 19000; // 18 seconds
 
 extern const byte PROGMEM text_bitmap[];
 unsigned long credits_started;
@@ -113,7 +113,7 @@ void CreditsState::setup() {
 void CreditsState::loop() {
   unsigned long now_ms = millis();
   if ((now_ms - credits_started) > credits_delay) {
-    State::change_state(&gameover_state);
+    State::change_state(&win_state);
   }
   text.loop();
 }
