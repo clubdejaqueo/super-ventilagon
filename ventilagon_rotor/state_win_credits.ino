@@ -1,16 +1,20 @@
 #include <Tlc5940.h>
+CreditsState state_credits;
+const long credits_delay = 13250; // 13.25 seconds
+
 extern const byte PROGMEM text_bitmap[];
+unsigned long credits_started;
 
-uint32_t colors[] = {
-  0x0000ff,
-  0x00ff00,
-  0xffff00,
-  0x00ffff,
-  0xff00ff,
-  0xff0000,
-};
+//uint32_t colors[] = {
+//  0x0000ff,
+//  0x00ff00,
+//  0xffff00,
+//  0x00ffff,
+//  0xff00ff,
+//  0xff0000,
+//};
 
-const byte HALL_SENSOR = 2;
+//const byte HALL_SENSOR = 2;
 const byte DISPLAY_LEN = 16;
 const byte CHAR_WIDTH = 6;
 const byte NUM_COLORS = 6;
@@ -21,8 +25,8 @@ const char texto[] PROGMEM = "                SUPER VENTILAGON - Bits: alecu - V
 const int size_texto = sizeof(texto) - DISPLAY_LEN;
 const long step_delay = 175;
 
-volatile unsigned long last_turn = 0;
-volatile unsigned long last_turn_duration = 10L;
+//volatile unsigned long last_turn = 0;
+//volatile unsigned long last_turn_duration = 10L;
 
 unsigned long prev_turn = 0;
 
@@ -63,7 +67,6 @@ class TextDisplay {
       static char letra;
       if (char_column >= CHAR_WIDTH) {
         letra = pgm_read_byte(texto + cursor + current_char++);
-        Serial.print(letra);
         char_column = 0;
         if ((millis() - last_step) > step_delay) {
           last_step = millis();
@@ -95,21 +98,22 @@ class TextDisplay {
 
 TextDisplay text;
 
-void handle_interrupt() {
-  unsigned long this_turn = micros();
-  unsigned long this_turn_duration = this_turn - last_turn;
-  last_turn_duration = this_turn_duration;
-  last_turn = this_turn;
-}
+//void handle_interrupt() {
+//  unsigned long this_turn = micros();
+//  unsigned long this_turn_duration = this_turn - last_turn;
+//  last_turn_duration = this_turn_duration;
+//  last_turn = this_turn;
+//}
 
-void setup() {
-  pinMode(HALL_SENSOR, INPUT_PULLUP);
-  attachInterrupt(0, handle_interrupt, FALLING);
-  Serial.begin(57600);
-  Tlc.init();
+void CreditsState::setup() {
+  credits_started = millis();
   text.reset();
 }
 
-void loop() {
+void CreditsState::loop() {
+  unsigned long now_ms = millis();
+  if ((now_ms - credits_started) > credits_delay) {
+    State::change_state(&gameover_state);
+  }
   text.loop();
 }

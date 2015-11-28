@@ -120,6 +120,15 @@ class WinState : public State {
     void loop();
 };
 
+class CreditsState : public State {
+  public:
+    const char* name() {
+      return "Rolling Credits";
+    }
+    void setup();
+    void loop();
+};
+
 class PlayState : public State {
   public:
     int section;
@@ -203,6 +212,7 @@ extern GameoverState gameover_state;
 extern WinState win_state;
 extern PlayState play_state;
 extern ResettingState resetting_state;
+extern CreditsState state_credits;
 extern const byte PROGMEM transformations[];
 extern Level* levels[];
 extern Level* current_level;
