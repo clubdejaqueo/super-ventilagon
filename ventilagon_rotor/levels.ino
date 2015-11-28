@@ -454,7 +454,7 @@ Level level6(40000L, 4, 7, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, e
 
 
 Level* levels[] = {
-  &level1, NULL, &level2, &level3, &level4, &level5, &level6, NULL
+  &level1, &level2, &level3, &level4, &level5, &level6, NULL
 };
 
 Level* current_level = levels[0];
