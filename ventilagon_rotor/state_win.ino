@@ -3,8 +3,8 @@ WinState win_state;
 const long win_step_delay = 25;
 unsigned long win_last_step = 0;
 unsigned long win_started;
-const long win_delay_1 = 45000; // 45 seconds
-const long win_delay_2 = win_delay_1 + win_step_delay * NUM_ROWS * 2; // un poquin mas para que se vaya todo
+const long win_delay_1 = 45000 - 7000; // 45 seconds
+const long win_delay_2 = win_delay_1 + 7000; // un poquin mas para que se vaya todo
 
 void WinState::setup() {
   display.calibrate(true);
