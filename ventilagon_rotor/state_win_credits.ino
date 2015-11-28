@@ -21,7 +21,7 @@ const byte NUM_COLORS = 6;
 
 
 const char texto2[] PROGMEM = "SUPER VENTILAGON";
-const char texto[] PROGMEM = "                SUPER VENTILAGON - Bits: alecu - Volts: Jorge - Waves: Cris - (C) 2015 Club de Jaqueo                ";
+const char texto[] PROGMEM = "                SUPER VENTILAGON - Bits: alecu - Volts: Jorge - Waves: Cris - (C) 2015 Club de Jaqueo                          ";
 const int size_texto = sizeof(texto) - DISPLAY_LEN;
 const long step_delay = 175;
 

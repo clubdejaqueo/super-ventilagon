@@ -50,3 +50,7 @@ void Audio::play_song(char song) {
 void Audio::reset() {
   Serial.print("0R");
 }
+
+void Audio::stop_servo() {
+  Serial.print("r");
+}

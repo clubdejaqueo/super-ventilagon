@@ -22,6 +22,7 @@ uint32_t colors[] = {
   0x00ffff,
   0xff00ff,
   0xff0000,
+  0x000000,
 };
 
 #define NEO_PIN 7
@@ -80,6 +81,12 @@ void stop_timer() {
   prender_botones();
 }
 
+void stop_no_leds() {
+  timer_running = false;
+  update_servo_colors(0);
+  apagar_botones();
+}
+
 void reset_it_all() {
   timer_running = false;
   update_servo_colors(0);
@@ -116,6 +123,9 @@ void serialEvent() {
         break;
       case 'S':
         start_timer();
+        break;
+      case 'r':
+        stop_no_leds();
         break;
       case 'R':
         reset_it_all();

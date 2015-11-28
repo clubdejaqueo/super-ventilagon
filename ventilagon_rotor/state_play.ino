@@ -45,6 +45,7 @@ void PlayState::advance_section(unsigned long now) {
   if (levels[section] == NULL) {
     // ganaste
     audio.play_win();
+    audio.stop_servo();
     State::change_state(&state_credits);
     return;
   }
@@ -81,9 +82,9 @@ void PlayState::loop() {
       }
     } else {
       // crash boom bang
+      ledbar.reset();
       audio.play_crash();
       audio.stop_song();
-      ledbar.reset();
       State::change_state(&gameover_state);
     }
     last_step = now;

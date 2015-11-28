@@ -199,6 +199,7 @@ class Audio {
     void inline play_game_over();
     void inline begin();
     void inline stop_song();
+    void inline stop_servo();
     void inline reset();
     void inline play_song(char song);
 };
