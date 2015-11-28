@@ -7,7 +7,8 @@ PlayState play_state;
 unsigned long section_durations[] = {
   1325 * CENTISECONDS,
   1325 * CENTISECONDS,
-  1325 * CENTISECONDS,
+  1325 * 2 * CENTISECONDS,
+  1325 * 2 * CENTISECONDS,
   1325 * 2 * CENTISECONDS,
   1325 * 3 * CENTISECONDS,
   ULONG_MAX
