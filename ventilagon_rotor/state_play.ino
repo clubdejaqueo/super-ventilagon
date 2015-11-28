@@ -19,7 +19,7 @@ char section_sounds[] = {
 };
 
 void PlayState::setup() {
-  current_level = &levels[new_level];
+  current_level = levels[new_level];
   paused = false;
   board.reset();
   audio.begin();
@@ -42,7 +42,12 @@ void PlayState::advance_section(unsigned long now) {
   section_init_time = now;
   section_duration = section_durations[section];
   audio.play_song(section_sounds[section]);
-  current_level = &levels[section];
+  if (levels[section] == NULL) {
+    // ganaste
+    State::change_state(&win_state);
+    return;
+  }
+  current_level = levels[section];
 }
 
 
@@ -75,6 +80,9 @@ void PlayState::loop() {
       }
     } else {
       // crash boom bang
+      audio.play_crash();
+      audio.stop_song();
+      ledbar.reset();
       State::change_state(&gameover_state);
     }
     last_step = now;

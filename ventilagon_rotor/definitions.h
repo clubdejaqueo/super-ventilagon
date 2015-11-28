@@ -48,10 +48,12 @@ class CircularBuffer {
 
 class Ledbar {
     void setPixelColor(int pixel, long color);
-
+    bool multicolored;
   public:
     void init();
     void clear();
+    void reset();
+    void set_win_state();
     void draw(byte num_row, boolean value, boolean alt_column);
     inline void update();
 };
@@ -68,6 +70,8 @@ class Board {
     void step();
     void step_back();
     void draw_column(byte column);
+    void win_reset();
+    void win_step_back();
 };
 
 class Display {
@@ -103,6 +107,15 @@ class GameoverState : public State {
       return "GAME OVER";
     }
     void apagar_todo();
+    void setup();
+    void loop();
+};
+
+class WinState : public State {
+  public:
+    const char* name() {
+      return "FOR THE WIN!";
+    }
     void setup();
     void loop();
 };
@@ -172,6 +185,7 @@ class Level {
 class Audio {
   public:
     void inline play_superventilagon();
+    void inline play_win();
     void inline play_crash();
     void inline play_game_over();
     void inline begin();
@@ -186,10 +200,11 @@ extern Display display;
 extern Ship ship;
 extern Audio audio;
 extern GameoverState gameover_state;
+extern WinState win_state;
 extern PlayState play_state;
 extern ResettingState resetting_state;
 extern const byte PROGMEM transformations[];
-extern Level levels[];
+extern Level* levels[];
 extern Level* current_level;
 extern byte new_level;
 extern int nave_calibrate;

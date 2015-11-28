@@ -27,6 +27,10 @@ void Audio::play_crash() {
   Serial.print("c");
 }
 
+void Audio::play_win() {
+  Serial.print("d");
+}
+
 void Audio::play_game_over() {
   Serial.print("e");
 }
@@ -44,5 +48,5 @@ void Audio::play_song(char song) {
 }
 
 void Audio::reset() {
-  Serial.print("R");
+  Serial.print("0R");
 }

@@ -31,10 +31,31 @@ void Ledbar::clear() {
 
 const long RED = 0xff0000;
 
+void Ledbar::reset() {
+  multicolored = false;
+}
+
+void Ledbar::set_win_state() {
+  multicolored = true;
+}
+
+uint32_t colors[] = {
+  0x0000ff,
+  0x00ff00,
+  0xffff00,
+  0x00ffff,
+  0xff00ff,
+  0xff0000,
+};
+
 void Ledbar::draw(byte num_row, boolean value, boolean alt_column) {
   long color;
   if (value) {
-    color = current_level->color;
+    if (!multicolored) {
+      color = current_level->color;
+    } else {
+      color = colors[((num_row>>2)+(alt_column<<1))%6];
+    }
   } else { 
     color = alt_column ? current_level->bg1 : current_level->bg2;
   }

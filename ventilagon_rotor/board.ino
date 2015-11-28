@@ -76,6 +76,18 @@ void Board::step_back() {
   visible.push_front(0);
 }
 
+void Board::win_reset() {
+  pat.randomize();
+}
+
+void Board::win_step_back() {
+  visible.push_front(pat.next_row());
+
+  if (pat.finished()) {
+    pat.randomize();
+  }
+}
+
 void Board::draw_column(byte column) {
   byte mask = 1 << column;
   ledbar.clear();

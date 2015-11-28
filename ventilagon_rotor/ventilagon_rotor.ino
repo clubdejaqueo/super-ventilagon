@@ -14,10 +14,11 @@ void setup() {
   ship.init();
   board.fill_patterns();
   new_level = 0;
-  
+
+  ledbar.reset();
   audio.stop_song();
   audio.play_superventilagon();
-  State::change_state(&play_state);
+  State::change_state(&resetting_state);
 }
 
 bool boton_cw = false;
@@ -67,7 +68,7 @@ void serialEvent() {
         board.fill_patterns();
       }
       inChar = 0;
-    }    
+    }
   }
 }
 

@@ -445,14 +445,17 @@ int Level::new_drift(int current_drift) {
   return drift_calculator->get_new_drift(current_drift);
 }
 
-Level levels[] = {
-  Level(50000L, 4, 5, '1', 0x0000ff, 0x000000, 0x000001, patterns_level1, elements_in(patterns_level1), &no_drift),
-  Level(45000L, 4, 6, '2', 0x00ff00, 0x000000, 0x000100, patterns_level2, elements_in(patterns_level2), &slow_drift),
-  Level(40000L, 4, 7, '3', 0xffff00, 0x000000, 0x010100, patterns_level3, elements_in(patterns_level3), &slow_drift),
-  Level(40000L, 4, 7, '1', 0x00ffff, 0x000000, 0x000101, patterns_level4, elements_in(patterns_level4), &med_drift),
-  Level(40000L, 4, 7, '2', 0xff00ff, 0x000000, 0x010001, patterns_level5, elements_in(patterns_level5), &high_drift),
-  Level(40000L, 4, 7, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, elements_in(patterns_level6), &crazy_drift),
+Level level1(50000L, 4, 5, '1', 0x0000ff, 0x000000, 0x000001, patterns_level1, elements_in(patterns_level1), &no_drift);
+Level level2(45000L, 4, 6, '2', 0x00ff00, 0x000000, 0x000100, patterns_level2, elements_in(patterns_level2), &slow_drift);
+Level level3(40000L, 4, 7, '3', 0xffff00, 0x000000, 0x010100, patterns_level3, elements_in(patterns_level3), &slow_drift);
+Level level4(40000L, 4, 7, '1', 0x00ffff, 0x000000, 0x000101, patterns_level4, elements_in(patterns_level4), &med_drift);
+Level level5(40000L, 4, 7, '2', 0xff00ff, 0x000000, 0x010001, patterns_level5, elements_in(patterns_level5), &high_drift);
+Level level6(40000L, 4, 7, '3', 0xff0000, 0x000000, 0x010000, patterns_level6, elements_in(patterns_level6), &crazy_drift);
+
+
+Level* levels[] = {
+  &level1, NULL, &level2, &level3, &level4, &level5, &level6, NULL
 };
 
-Level* current_level = &levels[0];
+Level* current_level = levels[0];
 byte new_level = 0;
