@@ -1418,6 +1418,13 @@ $baseurl: '{{ site.baseurl }}/images';
 
 /* Header */
 
+	#arriba {
+		top: 0.3em;
+		right: 1em;
+		z-index: 100;
+		position: absolute;
+	}
+
 	#header {
 		@include vendor('transition', 'background-color #{_duration(transitions)} ease');
 		background: _palette(bg);
